@@ -11,28 +11,23 @@
     </ul>
 
     <ul>
-      <li v-for="post in posts" :key="post.id" v-text="post.title"></li>
+      <li v-for="name in names" :key="name.id" v-text="name.Name"></li>
     </ul>
   </div>
 </template>
-
 
 <script>
 import axios from "axios";
 export default {
   mounted: function() {
-    axios
-      .get("http://localhost:4000/")
-      .then(function(res) {
-        console.log(res.data.data);
-      })
-      .then(function(res) {
-        this.posts = res.data.data;
-      });
+    axios.get("http://localhost:11889/").then(res => {
+      console.log(res.data);
+      this.names = res.data;
+    });
   },
   data: function() {
     return {
-      posts: {}
+      names: {}
     };
   }
 };

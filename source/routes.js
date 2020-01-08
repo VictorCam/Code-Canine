@@ -11,9 +11,7 @@ router.use(cors());
 router.get("/", function(req, res) {
   User.findAll()
     .then(users => {
-      res.json({
-        data: users
-      });
+      res.send(users);
     })
     .catch(err => {
       res.status(500).json({ err });

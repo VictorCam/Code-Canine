@@ -7,6 +7,7 @@ import NotFound from "./components/404.vue";
 
 import VueAxios from "vue-axios";
 import Axios from "axios";
+import store from "./store"; //I'm mad because this is lower cased
 
 Vue.config.productionTip = false;
 
@@ -26,5 +27,6 @@ const router = new VueRouter({
 new Vue({
   el: "#main",
   router,
+  store,
   render: h => h(main)
 });

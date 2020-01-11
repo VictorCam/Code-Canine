@@ -2,33 +2,24 @@
   <div class="menu" id="menu">
     <h2>Sup</h2>
     <!--<p>First: {{ this.posts }}</p>-->
-    <p>Last:</p>
-    <p>Age:</p>
+    <!--<ul>
+      <li v-for="name in user" :key="name.id" v-text="name.Name"></li>
+    </ul>-->
 
-    <ul>
-      <li>Hello</li>
-      <li>World!</li>
-    </ul>
-
-    <ul>
-      <li v-for="name in names" :key="name.id" v-text="name.Name"></li>
-    </ul>
+    <div v-for="name in users" :key="name.id">
+      {{ name.Name }} {{ name.ID }}
+    </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import { mapState } from "vuex";
 export default {
-  mounted: function() {
-    axios.get("http://localhost:11889/").then(res => {
-      console.log(res.data);
-      this.names = res.data;
-    });
+  mounted() {
+    this.$store.dispatch("loadUsers");
   },
-  data: function() {
-    return {
-      names: {}
-    };
+  computed: {
+    ...mapState(["users"])
   }
 };
 </script>

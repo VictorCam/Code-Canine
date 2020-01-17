@@ -1,6 +1,6 @@
 <template>
   <div id="footer">
-    <footer>CopyRight CodeCanine</footer>
+    <footer>CopyRight 2020</footer>
   </div>
 </template>
 

@@ -1,15 +1,15 @@
 <template>
   <div class="hello">
-    <h1>Goodbye</h1>
-    <p>your id is {{ $route.params.uid }}</p>
-
+    <h1>Sign Up</h1>
     <form @submit.prevent="addPost">
-      First name:<br />
-      <input type="text" name="firstname" v-model="post.first" />
+      UserName:
       <br />
-      Last name:<br />
-      <input type="text" name="lastname" v-model="post.last" />
-      <br /><br />
+      <input type="text" name="username" v-model="post.username" />
+      <br />Password:
+      <br />
+      <input type="password" name="password" v-model="post.password" />
+      <br />
+      <br />
       <input type="submit" value="Submit" />
     </form>
   </div>

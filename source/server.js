@@ -7,9 +7,10 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-var routes = require("./routes");
+var users = require("./routes/users");
 
-app.use("/", routes);
+app.use("/", users);
+app.use("/profile/:id", users);
 
 const PORT = process.env.PORT || 11889;
 app.listen(PORT, function() {

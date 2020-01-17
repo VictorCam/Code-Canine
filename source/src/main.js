@@ -1,8 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import main from "./main.vue";
-import Bye from "./components/ByeWorld.vue";
-import Hello from "./components/HelloWorld.vue"; //this
+import profile from "./components/profile.vue";
+import login from "./components/login.vue";
+import signup from "./components/signup.vue";
+import home from "./components/home.vue"; //this
 import NotFound from "./components/404.vue";
 
 import VueAxios from "vue-axios";
@@ -15,8 +17,10 @@ Vue.use(VueRouter, VueAxios, Axios);
 
 const routes = [
   { path: "*", name: "404", component: NotFound },
-  { path: "/", name: "Hello", component: Hello },
-  { path: "/bye/:uid", name: "profile", component: Bye }
+  { path: "/", name: "home", component: home },
+  { path: "/profile/:id", name: "profile", component: profile },
+  { path: "/login", name: "login", component: login },
+  { path: "/signup", name: "signup", component: signup }
 ];
 
 const router = new VueRouter({

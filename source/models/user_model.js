@@ -1,5 +1,5 @@
 const Sequelize = require("Sequelize");
-const db = require("./db.js");
+const db = require("../db");
 
 module.exports = db.sequelize.define(
   "mysampletables",
@@ -10,7 +10,10 @@ module.exports = db.sequelize.define(
       autoIncrement: true
     },
     Name: {
-      type: Sequelize.TEXT
+      type: Sequelize.STRING
+    },
+    Password: {
+      type: Sequelize.STRING
     }
   },
   {

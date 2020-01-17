@@ -1,9 +1,13 @@
 <template>
   <div id="main">
-    <h1>CodeCanine</h1>
+    <h1>Title</h1>
     <router-link id="link" to="/">Home</router-link>
-    <router-link id="link" to="/bye/10">Bye</router-link>
-    <router-view></router-view>
+    <router-link id="link" to="/profile/1">Profile 1</router-link>
+    <router-link id="link" to="/profile/2">Profile 2</router-link>
+    <router-link id="link" to="/profile/3">Profile 3</router-link>
+    <router-link id="link" to="/login">Login</router-link>
+    <router-link id="link" to="/signup">Sign Up</router-link>
+    <router-view :key="$route.name + ($route.params.id || '')"></router-view>
     <cfooter></cfooter>
   </div>
 </template>
@@ -21,5 +25,9 @@ export default {
 <style scoped>
 h1 {
   color: gray;
+}
+
+#link {
+  padding: 5px;
 }
 </style>

@@ -24,6 +24,12 @@ npm run build
 npm run lint
 ```
 
+### Run server api (xammpp) using phpmyadmin localhost
+
+```
+nodemon server.js
+```
+
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).

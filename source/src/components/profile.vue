@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <h1>Profile</h1>
+    <!--code name fluffur-->
     <div v-if="user.ID">{{ user.Name }} {{ user.ID }}</div>
     <div v-else>USER DOES NOT EXIST</div>
   </div>

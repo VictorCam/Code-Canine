@@ -16,6 +16,7 @@
 </template>
 
 <script>
+//import axios from "axios";
 export default {
   data() {
     return {
@@ -25,6 +26,12 @@ export default {
   methods: {
     addPost() {
       console.log(this.post);
+      console.log(this.post.password);
+      console.log(this.post.username);
+      /* axios.post("http://localhost:11889/").then(response => {
+        console.log(response);
+      });*/
+      //console.log(this.post.usern
     }
   }
   /*

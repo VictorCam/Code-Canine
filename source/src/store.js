@@ -6,12 +6,11 @@ import router from "router";
 Vue.use(vuex, axios, router);
 
 export default new vuex.Store({
-  getters: {
-    // id: router.route.params.id
-  },
+  getters: {},
   state: {
     users: [],
-    user: []
+    user: [],
+    register: []
   },
   actions: {
     loadUsers({ commit }) {
@@ -22,12 +21,17 @@ export default new vuex.Store({
       });
     },
     loadUser({ commit }, payload) {
-      //dispatch(this.$route.params.id);
-      //console.log("store:", this.$route.params.id);
       axios.get(`http://localhost:11889/profile/${payload}`).then(res => {
         console.log("profile:", res.data);
         this.user = res.data;
         commit("SET_USER", this.user);
+      });
+    },
+    loadRegister({ commit }) {
+      axios.post(`http://localhost:11889/`).then(res => {
+        console.log("login:", res.data);
+        this.register = res.data;
+        commit("SET_REGISTER", this.register);
       });
     }
   },
@@ -38,6 +42,9 @@ export default new vuex.Store({
     SET_USER(state, user, payload) {
       state.user = user;
       state.payload = payload;
+    },
+    SET_REGISTER(state, register) {
+      state.register = register;
     }
   }
 });

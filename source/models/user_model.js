@@ -1,8 +1,8 @@
 const Sequelize = require("Sequelize");
 const db = require("../db");
 
-module.exports = db.sequelize.define(
-  "mysampletables",
+module.exports = db.sequelize.define( 
+  "user_table", //database table goes here (appends s sometimes)
   {
     ID: {
       type: Sequelize.INTEGER,

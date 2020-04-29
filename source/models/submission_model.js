@@ -2,7 +2,7 @@ const Sequelize = require("Sequelize");
 const db = require("../db");
 
 module.exports = db.sequelize.define(
-  "mysampletables_sub_arts",
+  "user_art",
   {
     ID: {
       type: Sequelize.INTEGER

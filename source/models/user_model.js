@@ -14,6 +14,9 @@ module.exports = db.sequelize.define(
     },
     Password: {
       type: Sequelize.STRING
+    },
+    icon: {
+      type: Sequelize.STRING
     }
   },
   {

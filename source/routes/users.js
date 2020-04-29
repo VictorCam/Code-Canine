@@ -41,7 +41,7 @@ router.get("*", function(req, res) {
   res.status(500).json("ERROR");
 });
 
-router.get("/signup", function() {
+router.get("/test", function() {
   const data = {
     ID: 6,
     Name: "mike",
@@ -58,23 +58,5 @@ router.get("/signup", function() {
     .then(User)
     .catch(err => console.log(err));
 });
-
-/*router.get('/signup', (req, res) => {
-  const data = {
-    ID: 5,
-    Name: "Donut",
-    Password: "robux"
-  }
-
-  let { ID, Name, Password } = data;
-
-  User.create({
-    ID,
-    Name,
-    Password
-  })
-  .then(User)
-  .catch(err => console.log(err));
-}*/
 
 module.exports = router;

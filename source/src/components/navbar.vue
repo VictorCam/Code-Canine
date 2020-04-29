@@ -1,6 +1,6 @@
 <template>
   <div id="main">
-    <h1>CodeCanine</h1>
+    <h1>Codek</h1>
     <router-link id="link" to="/">Home</router-link>
     <router-link id="link" to="/profile/1">Profile 1</router-link>
     <router-link id="link" to="/profile/2">Profile 2</router-link>

@@ -33,3 +33,9 @@ nodemon server.js
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### notes to self
+
+```
+npm update (fix vulerabilities)
+```

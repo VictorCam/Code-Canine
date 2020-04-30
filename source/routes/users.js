@@ -1,62 +1,43 @@
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
+const connectsql = require("../db_connection");
+
 //const jwt = require("jsonwebtoken");
 //const bcrpyt = require("bcrypt");
-const User = require("../models/user_model");
-//const Submission = require("../models/submission_model");
-//const test = require("./test.json");
 
-router.use(cors());
 
-//Submission.belongsTo(User);
-
-router.get("/", function(req, res) {
-  User.findAll()
-    .then(users => {
-      res.send(users);
-    })
-    .catch(err => {
-      console.log("error");
-      res.status(500).json({ err });
-    });
+router.get("/", (req, res) => {
+  connectsql.query("SELECT * from user_tables", (err, rows, fields) => {
+    if(!err) {
+      res.status(200).send(rows);
+    }
+    else {
+      console.log(err);
+    }
+  })
 });
 
 router.get("/profile/:id", function(req, res) {
-  User.findByPk(req.params.id)
-    .then(users => {
-      res.send(users);
-    })
-    .catch(err => {
-      console.log("error");
-      res.status(500).json({ err });
-    });
-});
+  const id = req.params.id;
+  connectsql.query('SELECT * FROM  user_tables WHERE ID = ' + connectsql.escape(id) , (err, rows, fields) => {
+    if(!err) {
+      res.status(200).send(rows[0]);
+    }
+    else {
+      console.log(err);
+    }
+  });
+})
 
 router.get("/profile/*", function(req, res) {
-  res.status(500).json("ERROR");
+  res.status(500).send("ERROR");
 });
 
 router.get("*", function(req, res) {
-  res.status(500).json("ERROR");
+  res.status(500).send("ERROR");
 });
 
-router.get("/test", function() {
-  const data = {
-    ID: 6,
-    Name: "mike",
-    Password: "SIKE11"
-  };
-
-  let { ID, Name, Password } = data;
-
-  User.create({
-    ID,
-    Name,
-    Password
-  })
-    .then(User)
-    .catch(err => console.log(err));
-});
+router.use(cors());
 
 module.exports = router;

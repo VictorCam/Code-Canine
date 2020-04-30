@@ -20,7 +20,6 @@ import { mapState } from "vuex"
 export default {
   data() {
     return {
-      loadimg: "@/assets/1.png"
     }
   },
   computed: {

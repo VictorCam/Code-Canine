@@ -7,12 +7,14 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-var users = require("./routes/users");
+//routes
+var users_route = require("./routes/users");
 
-app.use("/", users);
-app.use("/profile/:id", users);
+app.use("/", users_route);
+app.use("/profile/:id", users_route);
 
-const PORT = process.env.PORT || 11889;
+
+const PORT = process.env.PORT || 13377;
 app.listen(PORT, function() {
   console.log("Server is running on port:", PORT);
 });

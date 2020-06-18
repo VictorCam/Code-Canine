@@ -8,12 +8,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //routes
-var users_route = require("./routes/users");
+const
+  home = require('./routes/route_home'),
+  profiles = require('./routes/route_profile'),
+  register = require('./routes/route_register')
 
-app.use("/", users_route);
-app.use("/profile/:id", users_route);
+//linked routes
+app.use("/", [home,profiles,register]);
 
 
+//port
 const PORT = process.env.PORT || 13377;
 app.listen(PORT, function() {
   console.log("Server is running on port:", PORT);

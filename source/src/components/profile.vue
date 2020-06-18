@@ -41,7 +41,7 @@ export default {
   created() {
     this.fetchUser();
   },
-  
+
   methods: {
     fetchUser() {
       this.$store.dispatch("loadUser", Number(this.$route.params.id));

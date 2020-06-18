@@ -6,6 +6,7 @@ import login from "./components/login.vue";
 import signup from "./components/signup.vue";
 import home from "./components/home.vue"; //this
 import NotFound from "./components/404.vue";
+import upload from "./components/upload.vue";
 
 import VueAxios from "vue-axios";
 import Axios from "axios";
@@ -20,7 +21,8 @@ const routes = [
   { path: "/", name: "home", component: home },
   { path: "/profile/:id", name: "profile", component: profile },
   { path: "/login", name: "login", component: login },
-  { path: "/signup", name: "signup", component: signup }
+  { path: "/signup", name: "signup", component: signup },
+  { path: "/upload", name: "upload", component: upload }
 ];
 
 const router = new VueRouter({

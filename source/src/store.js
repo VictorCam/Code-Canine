@@ -27,9 +27,9 @@ export default new vuex.Store({
         commit("SET_USER", this.user);
       });
     },
-    loadRegister({ commit }) {
-      axios.post(`http://localhost:13377/`).then(res => {
-        console.log("login:", res.data);
+    loadRegister({ commit }, user) {
+      axios.post("http://localhost:13377/signup", user).then(res => {
+        console.log("registering:", user);
         this.register = res.data;
         commit("SET_REGISTER", this.register);
       });

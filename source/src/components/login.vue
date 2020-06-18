@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <h1>Login</h1>
-    <form @submit.prevent="addPost">
+    <!-- <form @submit.prevent="addPost">
       UserName:
       <br />
       <input type="text" name="username" v-model="post.username" />
@@ -11,7 +11,7 @@
       <br />
       <br />
       <input type="submit" value="Submit" />
-    </form>
+    </form> -->
   </div>
 </template>
 
@@ -19,12 +19,12 @@
 export default {
   data() {
     return {
-      post: {}
+      //post: {}
     };
   },
   methods: {
     addPost() {
-      console.log(this.post);
+      //console.log(this.post);
     }
   }
   /*

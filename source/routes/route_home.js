@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
-const connectsql = require("../db_connection");
+const connectsql = require("../database/db_connection");
 
 
 router.get("/", (req, res) => {
@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
     }
     else {
       console.log(err);
-      res.status(500).json("ERROR WITH HOME");
+      res.status(500).json("route error");
     }
   })
 });

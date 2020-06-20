@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
-const connectsql = require("../db_connection");
+const connectsql = require("../database/db_connection");
 const jwt = require("jsonwebtoken");
 const bcrpyt = require("bcrypt");
 var bodyParser = require('body-parser');
@@ -13,10 +13,7 @@ var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 router.post("/login", (req, res) => {
-    console.log("login point checked!");
-    console.log(req.body.username);
     var username = req.body.username;
-    console.log(req.body.password);
     var password = req.body.password;
 
     var sql = "SELECT * FROM user_tables where user_tables.Name = '" + username + "' AND user_tables.Password='" + password + "'";
@@ -36,5 +33,5 @@ router.post("/login", (req, res) => {
 })
 
 router.use(cors());
-1
+
 module.exports = router;

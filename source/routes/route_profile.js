@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
-const connectsql = require("../db_connection");
+const connectsql = require("../database/db_connection");
 
 
 router.get("/profile/:id", function(req, res) {

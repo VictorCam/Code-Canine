@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
-const connectsql = require("../db_connection");
+const connectsql = require("../database/db_connection");
 const jwt = require("jsonwebtoken");
 const bcrpyt = require("bcrypt");
 var bodyParser = require('body-parser')
@@ -11,7 +11,7 @@ var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 router.post("/signup", (req, res) => {
-    console.log("sucessful query");
+    console.log("sucessful signup");
     console.log(req.body.username);
     console.log(req.body.password);
 

@@ -7,14 +7,16 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//routes
+//imported routes
 const
   home = require('./routes/route_home'),
   profiles = require('./routes/route_profile'),
-  register = require('./routes/route_register')
+  register = require('./routes/route_register'),
+  login = require('./routes/route_login'),
+  post = require('./routes/route_post')
 
-//linked routes
-app.use("/", [home,profiles,register]);
+//linked routes (route middleware)
+app.use("/", [home,profiles,register,login,post]);
 
 
 //port

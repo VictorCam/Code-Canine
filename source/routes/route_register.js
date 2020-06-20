@@ -10,7 +10,7 @@ var app = express();
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-router.post("/signup", urlencodedParser, (req, res) => {
+router.post("/signup", (req, res) => {
     console.log("sucessful query");
     console.log(req.body.username);
     console.log(req.body.password);
@@ -20,13 +20,13 @@ router.post("/signup", urlencodedParser, (req, res) => {
     connectsql.query(sql, [req.body.username, req.body.password], function (err, data) {
             if (!err) {
                 res.status(200);
-                console.log("success!");
+                console.log("sign up success!");
             } else {
-                console.log("something went wrong");
+                console.log("something went wrong during sign up");
             }
         })
 })
 
 router.use(cors());
-1
+
 module.exports = router;

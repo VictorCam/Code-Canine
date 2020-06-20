@@ -1,17 +1,17 @@
 <template>
   <div class="login">
     <h1>Login</h1>
-    <!-- <form @submit.prevent="addPost">
+    <form @submit.prevent="addPost">
       UserName:
       <br />
-      <input type="text" name="username" v-model="post.username" />
+      <input type="text" name="username" v-model="user.username" />
       <br />Password:
       <br />
-      <input type="password" name="password" v-model="post.password" />
+      <input type="password" name="password" v-model="user.password" />
       <br />
       <br />
       <input type="submit" value="Submit" />
-    </form> -->
+    </form>
   </div>
 </template>
 
@@ -19,12 +19,17 @@
 export default {
   data() {
     return {
-      //post: {}
+      user: {
+          username: '',
+          password: ''
+      }
     };
   },
   methods: {
+    
     addPost() {
-      //console.log(this.post);
+      console.log(this.user);
+      this.$store.dispatch("loadLogin", this.user);
     }
   }
   /*

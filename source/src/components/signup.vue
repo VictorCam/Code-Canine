@@ -29,16 +29,7 @@ export default {
   methods: {
     
     addPost() {
-      console.log(this.user)
-      // console.log(this.user.username)
-      // console.log(this.user.password)
-      // console.log("username: ", this.username)
-      // console.log("password: ", this.password)
-      /* axios.post("http://localhost:11889/").then(response => {
-        console.log(response);
-      });*/
-      //console.log(this.post.usern
-
+      console.log(this.user);
       this.$store.dispatch("loadRegister", this.user);
     }
   }

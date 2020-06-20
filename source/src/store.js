@@ -10,7 +10,8 @@ export default new vuex.Store({
   state: {
     users: [],
     user: [],
-    register: []
+    register: [],
+    login: []
   },
   actions: {
     loadUsers({ commit }) {
@@ -33,6 +34,13 @@ export default new vuex.Store({
         this.register = res.data;
         commit("SET_REGISTER", this.register);
       });
+    },
+    loadLogin({ commit }, user) {
+      axios.post("http://localhost:13377/login", user).then(res => {
+        console.log("logging in:", user);
+        this.login = res.data;
+        commit("SET_LOGIN", this.login);
+      });
     }
   },
   mutations: {
@@ -45,6 +53,9 @@ export default new vuex.Store({
     },
     SET_REGISTER(state, register) {
       state.register = register;
+    },
+    SET_LOGIN(state, login) {
+      state.login = login;
     }
   }
 });

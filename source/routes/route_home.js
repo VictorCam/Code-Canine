@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
     }
     else {
       console.log(err);
-      res.status(500).json("ERROR");
+      res.status(500).json("ERROR WITH HOME");
     }
   })
 });

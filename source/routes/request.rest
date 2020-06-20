@@ -1,0 +1,24 @@
+GET http://localhost:13377/profile/1
+
+###
+GET http://localhost:13377/
+
+###
+
+POST http://localhost:13377/signup
+Content-Type: application/json
+
+{
+    "username": "Kyle",
+    "password": "donut"
+}
+
+###
+
+POST http://localhost:13377/login
+Content-Type: application/json
+
+{
+    "username": "Kyle",
+    "password": "donut"
+}

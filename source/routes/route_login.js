@@ -7,6 +7,7 @@ const bcrpyt = require("bcrypt");
 var bodyParser = require('body-parser');
 const { result } = require("lodash");
 var app = express();
+require("dotenv").config();
 
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -22,7 +23,8 @@ router.post("/login", (req, res) => {
     connectsql.query(sql, function (err, rows, fields) {
             if (rows.length === 1) {
                 console.log(sql);
-                const token = jwt.sign({username: username}, "donut", {expiresIn: "2m"});
+                console.log(rows[0].ID);
+                const token = jwt.sign({username: username}, process.env.TOKEN_SECRET, {expiresIn: "2m"});
                 res.status(200).header('auth-token', token).send("successful login");
                 // var decoded = jwt.verify(token, password);
                 // console.log(decoded);

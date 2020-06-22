@@ -1,7 +1,7 @@
 <template>
 <div class="hello">
-  <input type="file" @change="onFileChanged">
-  <button @click="onUpload">Upload!</button>
+  <!-- <input type="file" @change="onFileChanged"> -->
+  <!-- <button @click="onUpload">Upload!</button> -->
 </div>
 </template>
 

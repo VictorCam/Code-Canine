@@ -2,6 +2,7 @@ import vuex from "vuex";
 import Vue from "vue";
 import axios from "axios";
 import router from "router";
+import Cookies from 'js-cookie';
 
 Vue.use(vuex, axios, router);
 
@@ -11,7 +12,8 @@ export default new vuex.Store({
     users: [],
     user: [],
     register: [],
-    login: []
+    login: [],
+    data: []
   },
   actions: {
     loadUsers({ commit }) {
@@ -37,9 +39,26 @@ export default new vuex.Store({
     },
     loadLogin({ commit }, user) {
       axios.post("http://localhost:13377/login", user).then(res => {
-        console.log("logging in:", user);
+        // res.cookie('rememberme', '1', { expires: new Date(Date.now() + 900000), httpOnly: true })
+        console.log("logging in: ", user);
+        console.log("jwt token:", res.data);
+        var now = new Date();
+        var minutes = 2;
+        now.setTime(now.getTime() + (minutes * 60 * 1000));
+
+        Cookies.set('Authorization', res.data, {expires: now, SameSite: 'Strict' })
+        // window.localStorage.setItem('Authorization', res.data)
+        // console.log(window.localStorage.getItem('Authorization'));
         this.login = res.data;
         commit("SET_LOGIN", this.login);
+      });
+    },
+    loadData({ commit }) {
+      axios.get("http://localhost:13377/post").then(res => {
+        console.log("COokie!", Cookies.get("Authorization"));
+        console.log("logging in:", "hello");
+        this.data = res.data;
+        commit("SET_LOGIN", this.data);
       });
     }
   },
@@ -54,8 +73,8 @@ export default new vuex.Store({
     SET_REGISTER(state, register) {
       state.register = register;
     },
-    SET_LOGIN(state, login) {
-      state.login = login;
+    SET_LOGIN(state, data) {
+      state.data = data;
     }
   }
 });

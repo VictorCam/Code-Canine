@@ -31,7 +31,7 @@ npm run lint
 ### Run server api (xammpp) using phpmyadmin localhost
 
 ```
-nodemon server.js
+nodemon server.js (do this cmd inside database folder)
 ```
 
 ### Customize configuration
@@ -45,6 +45,5 @@ npm update (fix vulerabilities)
 ```
 
 ```
-make sure .env is on the database folder
+make sure .env is on the database folder with "TOKEN_SECRET = whatever_varchar_here"
 ```
-

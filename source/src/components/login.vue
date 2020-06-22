@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <h1>Login</h1>
-    <form @submit.prevent="addPost">
+    <form @submit.prevent="login">
       UserName:
       <br />
       <input type="text" name="username" v-model="user.username" />
@@ -27,9 +27,10 @@ export default {
   },
   methods: {
     
-    addPost() {
+    login() {
       console.log(this.user);
       this.$store.dispatch("loadLogin", this.user);
+      console.log(name);
     }
   }
   /*

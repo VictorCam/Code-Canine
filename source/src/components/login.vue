@@ -28,9 +28,8 @@ export default {
   methods: {
     
     login() {
-      console.log(this.user);
-      this.$store.dispatch("loadLogin", this.user);
-      console.log(name);
+      console.log(this.user)
+      this.$store.dispatch("loadLogin", this.user)
     }
   }
   /*

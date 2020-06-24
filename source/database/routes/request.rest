@@ -22,3 +22,12 @@ Content-Type: application/json
     "username": "Kyle",
     "password": "donut"
 }
+
+###
+
+GET http://localhost:13377/auth
+ 
+
+ ###
+
+ http://localhost:13377/test2

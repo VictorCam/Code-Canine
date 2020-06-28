@@ -12,7 +12,7 @@ import post from "./components/post.vue";
 import VueAxios from "vue-axios";
 import Axios from "axios";
 import store from "./store"; //I'm mad because this is lower cased
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 
 
 Vue.config.productionTip = false;
@@ -26,19 +26,7 @@ const routes = [
   { path: "/login", name: "login", component: login },
   { path: "/signup", name: "signup", component: signup },
   { path: "/upload", name: "upload", component: upload },
-  { path: "/post", name: "post", component: post,
-  beforeEnter: (to, from, next) => {
-    console.log(Cookies.get("Authorization"));
-    if(Cookies.get("Authorization") != null) {
-      console.log("you have access");
-      next();
-    }
-    else {
-      console.log("you do not have access");
-      routes.push("./login");
-    }
-  }
- },
+  { path: "/post", name: "post", component: post}
 ];
 
 const router = new VueRouter({

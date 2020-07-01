@@ -2,23 +2,18 @@ import vuex from "vuex";
 import Vue from "vue";
 import axios from "axios";
 import router from "router";
-// import Cookies from 'js-cookie'; 
-// import cookies from 'vue-cookies';
-// import cookie from 'cookie';
-
-// var VueCookie = require('vue-cookie');
-// Tell Vue to use the plugin
-// Vue.use(cookies);
+import Cookies from 'js-cookie'; 
 
 Vue.use(vuex, axios, router);
 
-// const myApi = axios.create({
-//   withCredentials: true,
-//   headers: {
-//     'Accept': 'application/json',
-//     'Content-Type': 'application/json',
-//   }
-// });
+const config = axios.create({
+  withCredentials:true,
+  headers: {
+    'Content-Type': 'application/json;charset=UTF-8',
+    "Access-Control-Allow-Origin": 'http://localhost:8080',
+    "Access-Control-Allow-Credentials": true,
+    }
+});
 
 export default new vuex.Store({
   getters: {},
@@ -52,22 +47,27 @@ export default new vuex.Store({
       });
     },
     loadLogin({ commit }, user) {
-      axios.post("http://localhost:13377/login", user).then(res => {
+      axios.post("http://localhost:13377/login", user, config).then(res => {
         // res.cookie('rememberme', '1', { expires: new Date(Date.now() + 900000), httpOnly: true })
-        console.log("logging in: ", user);
-        console.log("jwt token:", res.data); 
+        console.log("STORE USER: ", user);
+        console.log("STORE STATUS:", res.data);
         this.login = res.data;
         commit("SET_LOGIN", this.login);
-        return axios.get("http://localhost:13377/auth", {params: {ID: res.data}, withCredentials:true})
-      }).then(res => {
-        console.log("wow", res.data);
+        return axios.get("http://localhost:13377/auth", {withCredentials:true})})
+        .then(res => {
+        console.log("STORE AUTH:", res.data);
+        if(res.data == 'SUCCESS') {
+          var now = new Date();
+          var minutes = 1;
+          now.setTime(now.getTime() + (minutes * 60 * 1000));
+
+          Cookies.set('access', 'true', {/*expires: 'Session',*/ SameSite: 'Strict' })
+        }
       });
     },
     loadData({ commit }) {
-      axios.get("http://localhost:13377/post").then(res => {
-        // console.log("COokie!", Cookies.get("Authorization"));
-        console.log("logging in:", "hello");
-        // console.log(cookies.get("bearer"))
+      axios.get("http://localhost:13377/post", {withCredentials:true}).then(res => {
+        console.log("logging in:", res.data);
         this.data = res.data;
         commit("SET_LOGIN", this.data);
       });

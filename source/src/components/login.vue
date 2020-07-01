@@ -16,6 +16,8 @@
 </template>
 
 <script>
+// import Cookies from "js-cookie";
+import EventBus from './EventBus';
 export default {
   data() {
     return {
@@ -26,21 +28,14 @@ export default {
     };
   },
   methods: {
-    
     login() {
       console.log(this.user);
       this.$store.dispatch("loadLogin", this.user);
-      console.log(name);
+      this.emitMethod()
+    },
+    emitMethod () {
+      EventBus.$emit('logged-in', 'true') //getters from store would be optimal
     }
   }
-  /*
-  watch: {
-    $route(to) {
-      alert(to.params.uid);
-    }
-  },
-  created() {
-    alert(this.$route.params.uid);
-  }*/
 };
 </script>

@@ -22,7 +22,8 @@ export default new vuex.Store({
     user: [],
     register: [],
     login: [],
-    data: []
+    data: [],
+    checkauth: []
   },
   actions: {
     loadUsers({ commit }) {
@@ -46,6 +47,15 @@ export default new vuex.Store({
         commit("SET_REGISTER", this.register);
       });
     },
+    checkauth({ commit }) {
+      axios.get("http://localhost:13377/checkauth", {withCredentials:true}).then(res => {
+        console.log("verifying:", res.data);
+        this.checkauth = res.data;
+        commit("CHECK_AUTH", this.checkauth);
+        console.log("checking auth right now", this.state.checkauth)
+        return this.state.checkauth
+      });
+    },
     loadLogin({ commit }, user) {
       axios.post("http://localhost:13377/login", user, config).then(res => {
         // res.cookie('rememberme', '1', { expires: new Date(Date.now() + 900000), httpOnly: true })
@@ -57,10 +67,10 @@ export default new vuex.Store({
         .then(res => {
         console.log("STORE AUTH:", res.data);
         if(res.data == 'SUCCESS') {
-          var now = new Date();
-          var minutes = 1;
-          now.setTime(now.getTime() + (minutes * 60 * 1000));
-
+          // var now = new Date();
+          // var minutes = 1;
+          // now.setTime(now.getTime() + (minutes * 60 * 1000));
+          
           Cookies.set('access', 'true', {/*expires: 'Session',*/ SameSite: 'Strict' })
         }
       });
@@ -86,6 +96,9 @@ export default new vuex.Store({
     },
     SET_LOGIN(state, data) {
       state.data = data;
+    },
+    CHECK_AUTH(state, checkauth) {
+      state.checkauth = checkauth
     }
   }
 });

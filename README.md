@@ -2,8 +2,6 @@ Work In Progress MEVN Website
 
 Using MySQL, ExpressJS, VueJS, and NodeJS
 
-# within source you may be do the following cmds
-
 ## Project setup
 
 ```
@@ -31,19 +29,26 @@ npm run lint
 ### Run server api (xammpp) using phpmyadmin localhost
 
 ```
-nodemon server.js (do this cmd inside database folder)
+nodemon server.js
+```
+
+### Fix Vulerabilities
+
+```
+npm update
+```
+
+### Add Environment 
+```
+make .env file on base directory then in .env write TOKEN_SECRET = "whatever_varchar_here"
+```
+
+### Vue UI
+
+```
+vue ui
 ```
 
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
-
-### Notes
-
-```
-npm update (fix vulerabilities)
-```
-
-```
-create .env in code-canine folder and in .env write TOKEN_SECRET = "whatever_varchar_here"
-```

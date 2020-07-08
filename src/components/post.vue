@@ -9,10 +9,11 @@
 import { mapState } from "vuex";
 export default {
   data() {
-    return {}
+    return {
+    }
   },
   mounted() {
-    console.log("loading data now");
+    // console.log("dispatching data");
     this.$store.dispatch("loadData");
   },
   methods: {

@@ -7,7 +7,7 @@
     <router-link id="link" to="/profile/3">Profile 3</router-link>
     <router-link id="link" to="/login">Login</router-link>
     <router-link id="link" to="/signup">Sign Up</router-link>
-    <router-link id="link" to="/upload">Upload</router-link>
+    <!-- <router-link v-if="auth!='true'" id="link" to="/upload">Upload</router-link> -->
     <router-link id="link" to="/post">Post</router-link>
     <router-view :key="$route.name + ($route.params.id || '')"></router-view>
     <cfooter></cfooter>
@@ -16,7 +16,6 @@
 
 <script>
 import cfooter from "./footer";
-
 export default {
   components: {
     cfooter: cfooter

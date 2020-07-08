@@ -1,7 +1,7 @@
 <template>
-  <div class="hello">
-    <h1>Sign Up</h1>
-    <form @submit.prevent="addPost">
+  <div class="login">
+    <h1>Login</h1>
+    <form @submit.prevent="login">
       UserName:
       <br />
       <input type="text" name="username" v-model="user.username" />
@@ -16,7 +16,6 @@
 </template>
 
 <script>
-//import axios from "axios";
 export default {
   data() {
     return {
@@ -27,20 +26,10 @@ export default {
     };
   },
   methods: {
-    
-    addPost() {
+    login() {
       console.log(this.user);
-      this.$store.dispatch("loadRegister", this.user);
+      this.$store.dispatch("loadLogin", this.user);
     }
   }
-  /*
-  watch: {
-    $route(to) {
-      alert(to.params.uid);
-    }
-  },
-  created() {
-    alert(this.$route.params.uid);
-  }*/
 };
 </script>

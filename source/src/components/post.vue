@@ -13,7 +13,7 @@ export default {
     }
   },
   mounted() {
-    console.log("dispatching data");
+    // console.log("dispatching data");
     this.$store.dispatch("loadData");
   },
   methods: {

@@ -2,18 +2,23 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 module.exports = function(req,res,next) {
-    var key = getCookieValue('token', req);
+
+    if(req.headers.cookie == null) { //check if cookie exist
+      return res.status(401).send("Access Denied");
+    }
+
+    var key = getCookieValue('token', req); //do regex match since cookie exists
     if(!key) {
-        return res.status(401).send("Access Denied");
+        return res.status(401).send("Access Denied"); //if cookie name does not match then error out
     }
 
     jwt.verify(key,process.env.TOKEN_SECRET, (err,user) => {
     if(!err) {
-        req.user_ID = user.user_ID; //data to post
+        req.user_ID = user.user_ID; //sending data to route
         return next();
       }
     else {
-        return res.status(400).send("Invalid Token");
+        return res.status(400).send("Invalid Token"); //error if jwt is expired or invalid
     }
   })
 };

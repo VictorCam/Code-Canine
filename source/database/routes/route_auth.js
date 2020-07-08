@@ -32,7 +32,7 @@ router.post("/login", (req, res) => {
                 console.log(rows[0].ID);
                 const token = jwt.sign({user_ID: rows[0].ID}, process.env.TOKEN_SECRET, {expiresIn: "24h"});
                 app.set('token', token);
-                res.json("successful login");
+                res.send(true);
             } 
             else {
                 console.log("authentication failed"); //send  response of 401 for auth failed
@@ -48,9 +48,9 @@ router.get("/auth", (req, res) => {
   if(app.get('token')) {
     var message = "SUCCESS";
 
-    var now = new Date();
-    var minutes = 1;
-    now.setTime(now.getTime() + (minutes * 60 * 1000));
+    // var now = new Date();
+    // var minutes = 1;
+    // now.setTime(now.getTime() + (minutes * 60 * 1000));
     
     res.setHeader('Set-Cookie', cookie.serialize('token', app.get('token'), {
       httpOnly: true,

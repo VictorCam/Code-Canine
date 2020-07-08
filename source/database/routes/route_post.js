@@ -27,12 +27,5 @@ router.get("/post",verify, (req, res) => {
     res.send("data goes here");
 });
 
-router.get("/checkauth", (req, res) => {
-    // console.log("POST ROUTE ID:", req.user_ID); //yay we can use this for MySQL
-    // console.log("auth")
-    res.send("false");
-});
-
-
 
 module.exports = router;

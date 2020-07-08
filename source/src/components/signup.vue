@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="signup">
     <h1>Sign Up</h1>
     <form @submit.prevent="addPost">
       UserName:
@@ -27,9 +27,7 @@ export default {
     };
   },
   methods: {
-    
     addPost() {
-      console.log(this.user);
       this.$store.dispatch("loadRegister", this.user);
     }
   }

@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const
   home = require('./routes/route_home'),
   profiles = require('./routes/route_profile'),
-  register = require('./routes/route_auth'),
+  register = require('./routes/route_register'),
   login = require('./routes/route_auth'),
   post = require('./routes/route_post')
 

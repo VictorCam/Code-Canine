@@ -1,10 +1,11 @@
 import vuex from "vuex";
 import Vue from "vue";
 import axios from "axios";
-import router from "router";
+// import router from "router";
 import Cookies from 'js-cookie'; 
+import {router} from "./main";
 
-Vue.use(vuex, axios, router);
+Vue.use(vuex, axios);
 
 const config = axios.create({
   withCredentials:true,
@@ -21,9 +22,7 @@ export default new vuex.Store({
     users: [],
     user: [],
     register: [],
-    login: [],
-    data: [],
-    checkauth: []
+    login: false
   },
   actions: {
     loadUsers({ commit }) {
@@ -47,15 +46,6 @@ export default new vuex.Store({
         commit("SET_REGISTER", this.register);
       });
     },
-    checkauth({ commit }) {
-      axios.get("http://localhost:13377/checkauth", {withCredentials:true}).then(res => {
-        console.log("verifying:", res.data);
-        this.checkauth = res.data;
-        commit("CHECK_AUTH", this.checkauth);
-        console.log("checking auth right now", this.state.checkauth)
-        return this.state.checkauth
-      });
-    },
     loadLogin({ commit }, user) {
       axios.post("http://localhost:13377/login", user, config).then(res => {
         // res.cookie('rememberme', '1', { expires: new Date(Date.now() + 900000), httpOnly: true })
@@ -70,7 +60,7 @@ export default new vuex.Store({
           // var now = new Date();
           // var minutes = 1;
           // now.setTime(now.getTime() + (minutes * 60 * 1000));
-          
+          router.push("/post") //since user is logged in then we will push /post route
           Cookies.set('access', 'true', {/*expires: 'Session',*/ SameSite: 'Strict' })
         }
       });
@@ -94,11 +84,8 @@ export default new vuex.Store({
     SET_REGISTER(state, register) {
       state.register = register;
     },
-    SET_LOGIN(state, data) {
-      state.data = data;
-    },
-    CHECK_AUTH(state, checkauth) {
-      state.checkauth = checkauth
+    SET_LOGIN(state, login) {
+      state.login = login;
     }
   }
 });

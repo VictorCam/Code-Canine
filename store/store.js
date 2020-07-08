@@ -3,7 +3,7 @@ import Vue from "vue";
 import axios from "axios";
 // import router from "router";
 import Cookies from 'js-cookie'; 
-import {router} from "./main";
+import {router} from "../src/main";
 
 Vue.use(vuex, axios);
 

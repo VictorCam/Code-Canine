@@ -13,7 +13,7 @@ import notFound from "./components/404.vue";
 import upload from "./components/upload.vue";
 import post from "./components/post.vue";
 
-import store from "./store";
+import store from "../store/store";
 
 Vue.config.productionTip = false;
 

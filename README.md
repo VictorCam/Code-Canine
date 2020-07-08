@@ -38,12 +38,12 @@ nodemon server.js (do this cmd inside database folder)
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-### notes to self
+### Notes
 
 ```
 npm update (fix vulerabilities)
 ```
 
 ```
-make sure .env is on the database folder with "TOKEN_SECRET = whatever_varchar_here"
+create .env in code-canine folder and in .env write TOKEN_SECRET = "whatever_varchar_here"
 ```

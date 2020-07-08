@@ -19,8 +19,11 @@ import cfooter from "./footer";
 export default {
   components: {
     cfooter: cfooter
+  },
+    computed: {
+    // ...mapState(["users"])
   }
-};
+}
 </script>
 
 <style scoped>

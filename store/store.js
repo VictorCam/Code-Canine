@@ -17,12 +17,16 @@ const config = axios.create({
 });
 
 export default new vuex.Store({
-  getters: {},
+  // modules: {
+  //   login
+  // },
   state: {
     users: [],
     user: [],
     register: [],
     login: false
+  },
+  getters: {
   },
   actions: {
     loadUsers({ commit }) {

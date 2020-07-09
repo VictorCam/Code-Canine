@@ -2,7 +2,7 @@
   <div class="profile">
     <h1>Profile</h1>
 
-    <div v-if="user.ID && user.Name">
+    <div v-if="user.ID">
     <img width="100px" height="100px" :src="userWithIcon.icon">
     <p> {{ user.Name }} </p>
     <p> {{ user.icon}} </p>

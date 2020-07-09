@@ -1,30 +1,39 @@
 import vuex from "vuex";
 import Vue from "vue";
 import axios from "axios";
-// import router from "router";
 import Cookies from 'js-cookie'; 
-import {router} from "../src/main";
-
+// import {router} from "../src/main";
+import m_login from "./modules/m_login"
+import createPersistedState from "vuex-persistedstate"
 Vue.use(vuex, axios);
 
-const config = axios.create({
-  withCredentials:true,
-  headers: {
-    'Content-Type': 'application/json;charset=UTF-8',
-    "Access-Control-Allow-Origin": 'http://localhost:8080',
-    "Access-Control-Allow-Credentials": true,
-    }
-});
+// const config = axios.create({
+//   withCredentials:true,
+//   headers: {
+//     'Content-Type': 'application/json;charset=UTF-8',
+//     "Access-Control-Allow-Origin": 'http://localhost:8080',
+//     "Access-Control-Allow-Credentials": true,
+//     }
+// });
 
 export default new vuex.Store({
-  // modules: {
-  //   login
-  // },
+  modules: {
+    m_login: m_login
+  },
+  plugins: [createPersistedState({
+    paths: ['m_login'],
+    storage: {
+      getItem: (key) => Cookies.get(key),
+      removeItem: (key) => Cookies.remove(key),
+      setItem: (key, value) =>
+      Cookies.set(key, value, { secure: true, SameSite:'Strict' }),
+    }
+  })],
   state: {
     users: [],
     user: [],
     register: [],
-    login: false
+    user_auth: 0
   },
   getters: {
   },
@@ -50,30 +59,11 @@ export default new vuex.Store({
         commit("SET_REGISTER", this.register);
       });
     },
-    loadLogin({ commit }, user) {
-      axios.post("http://localhost:13377/login", user, config).then(res => {
-        // res.cookie('rememberme', '1', { expires: new Date(Date.now() + 900000), httpOnly: true })
-        console.log("STORE USER: ", user);
-        console.log("STORE STATUS:", res.data);
-        this.login = res.data;
-        commit("SET_LOGIN", this.login);
-        return axios.get("http://localhost:13377/auth", {withCredentials:true})})
-        .then(res => {
-        console.log("STORE AUTH:", res.data);
-        if(res.data == 'SUCCESS') {
-          // var now = new Date();
-          // var minutes = 1;
-          // now.setTime(now.getTime() + (minutes * 60 * 1000));
-          router.push("/post") //since user is logged in then we will push /post route
-          Cookies.set('access', 'true', {/*expires: 'Session',*/ SameSite: 'Strict' })
-        }
-      });
-    },
-    loadData({ commit }) {
+    loadKey({ commit }) {
       axios.get("http://localhost:13377/post", {withCredentials:true}).then(res => {
         console.log("logging in:", res.data);
-        this.data = res.data;
-        commit("SET_LOGIN", this.data);
+        this.key = res.data;
+        commit("SET_KEY", this.key); //why tho lol
       });
     }
   },
@@ -88,8 +78,8 @@ export default new vuex.Store({
     SET_REGISTER(state, register) {
       state.register = register;
     },
-    SET_LOGIN(state, login) {
-      state.login = login;
+    SET_KEY(state, key) {
+      state.user_auth = key;
     }
   }
 });

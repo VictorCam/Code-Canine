@@ -2,6 +2,7 @@
   <div class="post" id="post">
     <h1>Post</h1>
     <p>Hello World</p>
+    {{key}}
   </div>
 </template>
 
@@ -14,10 +15,10 @@ export default {
   },
   mounted() {
     // console.log("dispatching data");
-    this.$store.dispatch("loadData");
+    this.$store.dispatch("loadKey");
   },
-  methods: {
-    ...mapState(["data"])
+  computed: {
+    ...mapState(["key"])
   }
 };
 </script>

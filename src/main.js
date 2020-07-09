@@ -2,7 +2,6 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import VueAxios from "vue-axios";
 import Axios from "axios";
-import Cookies from "js-cookie";
 
 import main from "./main.vue";
 import profile from "./components/profile.vue";
@@ -40,23 +39,20 @@ router.beforeEach((to,from,next)=> {
 
 function check() {
   var AuthCheck = false
-  //cookie is for preventing refresh
-  //store is for changing the state
 
-  if(Cookies.get("access")) { //better if I could get from store even on refresh unless this is optimal
-    AuthCheck = true
+  if(store.state.m_login.login) { //needs improvement (can delete token and still access routes)
+    AuthCheck = store.state.m_login.login
   }
-  if(store.state.login) {
-    AuthCheck = store.state.login
-  }
+
   return AuthCheck
 }
 
 function auth_require(to,from,next) {
+
   var AuthCheck = check()
 
   //check if user is logged in if not restrict access to main part of the site
-  if(to.matched.some(record => record.meta.auth_require)) {
+  if(to.matched.some(record => record.meta.auth_require)) { //add &&?
 
     if(AuthCheck) {
       next()

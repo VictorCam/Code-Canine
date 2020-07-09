@@ -36,7 +36,7 @@ router.post("/login", (req, res) => {
             } 
             else {
                 console.log("authentication failed"); //send  response of 401 for auth failed
-                res.send("error");
+                res.send(false);
             }
         })
 })

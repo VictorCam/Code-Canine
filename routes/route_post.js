@@ -25,7 +25,18 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 router.get("/post",verify, (req, res) => {
     console.log("POST ROUTE ID:", req.user_ID); //yay we can use this for MySQL
     var id = req.user_ID.toString()
+    if(id) {
     res.status(200).send(id);
+    }
+    else {
+        res.status(200)
+    }
+});
+
+router.get("/logout",verify, (req, res) => {
+    res.clearCookie("vuex");
+    res.clearCookie("token");
+    res.status(200).send("success");
 });
 
 

@@ -4,7 +4,12 @@ require("dotenv").config();
 module.exports = function(req,res,next) {
 
     if(req.headers.cookie == null) { //check if cookie exist
-      return res.status(401).send("Access Denied");
+      return
+    }
+
+    var store = getCookieValue('vuex', req); //do regex match since cookie exists
+    if(!store) {
+      res.status(200)
     }
 
     var key = getCookieValue('token', req); //do regex match since cookie exists

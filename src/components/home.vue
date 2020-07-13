@@ -7,7 +7,7 @@
     </ul>-->
 
     <div v-for="name in users" :key="name.id">
-    <div v-if="name.ID == user_auth">
+    <div v-if="name.ID == user_auth.id">
     {{ name.Name }} {{ name.ID }} <span>  X EDIT PROFILE</span>
     </div>
     <div v-else>
@@ -22,11 +22,11 @@ import { mapState } from "vuex";
 export default {
   mounted() {
     this.$store.dispatch("loadUsers"),
-    this.$store.dispatch("loadKey")
+    this.$store.dispatch("m_login/loadKey")
   },
   computed: {
     ...mapState(["users"]),
-    ...mapState(["user_auth"])
+    ...mapState({user_auth: state => state.m_login.user_auth}),
     // ...mapState({login: state => state.m_login.login}),
   }
 };

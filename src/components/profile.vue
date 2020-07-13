@@ -7,7 +7,7 @@
     <p> {{ user.Name }} </p>
     <p> {{ user.icon}} </p>
     </div>
-    <div v-else>USER HAS BEEN TERMINATED FOR VIOLATING THE TERMS OF SERVICE</div>
+    <div v-else>LOADING</div>
 
   </div>
 </template>

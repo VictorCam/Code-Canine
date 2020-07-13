@@ -25,7 +25,12 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 router.get("/post",verify, (req, res) => {
     console.log("POST ROUTE ID:", req.user_ID); //yay we can use this for MySQL
     var id = req.user_ID.toString()
-    res.status(200).send(id);
+    if(id) {
+        res.status(200).send({id:id, bool:true})
+    }
+    else {
+        res.status(200).send({bool:false})
+    }
 });
 
 

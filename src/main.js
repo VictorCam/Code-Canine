@@ -39,10 +39,16 @@ router.beforeEach((to,from,next)=> {
 
 function check() {
   var AuthCheck = false
+  // this.$store.dispatch("m_login/loadKey")
 
-  if(store.state.m_login.login) { //needs improvement (can delete token and still access routes)
-    AuthCheck = store.state.m_login.login
+  if(store.state.m_login.user_auth.bool) { //needs improvement (can delete token and still access routes)
+    AuthCheck = store.state.m_login.user_auth.bool
   }
+
+  //if cookie login exists [true] ELSE (DELETE ALL COOKIES ON BACKEND)
+    //if cookie cookie true
+      //check if
+
 
   return AuthCheck
 }
@@ -73,6 +79,7 @@ function auth_require(to,from,next) {
       next('/post')
     }
     else {
+      console.log("check:",AuthCheck)
       next()
     }
   }

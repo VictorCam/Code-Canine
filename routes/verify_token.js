@@ -4,7 +4,7 @@ require("dotenv").config();
 module.exports = function(req,res,next) {
 
     if(req.headers.cookie == null) { //check if cookie exist
-      return res.status(401).send("Access Denied");
+      return
     }
 
     var key = getCookieValue('token', req); //do regex match since cookie exists
@@ -19,7 +19,6 @@ module.exports = function(req,res,next) {
         return next();
       }
     else {
-        res.clearCookie('vuex'); //NOTE to self: alternate solution would be to edit the cookies state
         return res.status(400).send("Invalid Token"); //error if jwt is expired or invalid
     }
   })

@@ -2,12 +2,12 @@
   <div class="post" id="post">
     <h1>Post</h1>
     <p>Hello World</p>
-    {{key}}
+    <!-- {{key}} -->
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+// import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -15,10 +15,10 @@ export default {
   },
   mounted() {
     // console.log("dispatching data");
-    this.$store.dispatch("loadKey");
+    // this.$store.dispatch("loadKey");
   },
   computed: {
-    ...mapState(["key"])
+    // ...mapState(["key"])
   }
 };
 </script>

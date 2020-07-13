@@ -29,14 +29,14 @@ router.post("/login", (req, res) => {
       console.log("SQL username + pasword:", req.body.username, " ", req.body.password);
 
             if (rows.length === 1) {
-                console.log(rows[0].ID);
+                var id = rows[0].ID.toString()
                 const token = jwt.sign({user_ID: rows[0].ID}, process.env.TOKEN_SECRET, {expiresIn: "24h"});
                 app.set('token', token);
-                res.send(true);
+                res.status(200).send({id:id, bool:true});
             } 
             else {
                 console.log("authentication failed"); //send  response of 401 for auth failed
-                res.send(false);
+                res.send({bool:false});
             }
         })
 })

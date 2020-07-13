@@ -2,7 +2,7 @@
   <div class="post" id="post">
     <h1>Post</h1>
     <p>Hello World</p>
-    {{key}}
+    {{user_auth}}
   </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
     this.$store.dispatch("loadKey");
   },
   computed: {
-    ...mapState(["key"])
-  }
+    ...mapState(["user_auth"]),
+  },
 };
 </script>

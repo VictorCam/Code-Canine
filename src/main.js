@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import VueAxios from "vue-axios";
 import Axios from "axios";
+import Cookies from "js-cookie";
 
 import main from "./main.vue";
 import profile from "./components/profile.vue";
@@ -38,10 +39,16 @@ router.beforeEach((to,from,next)=> {
 })
 
 function check() {
-  var AuthCheck = false
+  var AuthCheck = false //assume user will not be logged in
 
-  if(store.state.m_login.login) { //needs improvement (can delete token and still access routes)
-    AuthCheck = store.state.m_login.login
+  //check if state is false or if cookie does not exist
+  if(store.state.m_login.login == false || !Cookies.get('vuex')) {
+    //user is a guest make sure there isn't a token
+    store.dispatch("b_cookies")
+  }
+  
+  if(store.state.m_login.login == true) { //if user is logged in then this should execute
+    AuthCheck = true
   }
 
   return AuthCheck

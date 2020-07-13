@@ -65,6 +65,11 @@ export default new vuex.Store({
         this.key = res.data;
         commit("SET_KEY", this.key); //why tho lol
       });
+    },
+    b_cookies() {
+      axios.get("http://localhost:13377/b_cookies", {withCredentials:true}).then(res => {
+        console.log("cookies killed:", res.data);
+      });
     }
   },
   mutations: {

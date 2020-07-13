@@ -28,5 +28,25 @@ router.get("/post",verify, (req, res) => {
     res.status(200).send(id);
 });
 
+router.get("/b_cookies", (req, res) => {
+    if(req.headers.cookie == null) { //check if cookie exist
+        return res.status(200).send("guest");
+      }
+
+    var key = getCookieValue('token', req);
+
+    if(key) {
+    res.clearCookie('token');
+    res.status(200).send("killed cookies :)")
+    }
+    else {
+        res.status(200).send("guest")
+    }
+});
+
+function getCookieValue(a,req) {
+    var b = req.headers.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
+    return b ? b.pop() : '';
+  }
 
 module.exports = router;

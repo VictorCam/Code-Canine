@@ -11,6 +11,7 @@
     <router-link v-if="login==false" id="link" to="/signup">Sign Up</router-link>
     <router-link v-if="login==true"  id="link" to="/post">Post</router-link>
     <router-link v-if="login==true"  id="link" :to="'/profile/' + user_auth">My Profile</router-link>
+    <button v-if="login==true" v-on:click="logout">LOGOUT</button>
     <router-view :key="$route.name + ($route.params.id || '')"></router-view>
     <cfooter></cfooter>
   </div>
@@ -25,11 +26,18 @@ export default {
   },
   mounted() {
     // this.$store.dispatch("loadData");
+    if(this.$store.state.m_login_login == true) {
     this.$store.dispatch("loadKey")
+    }
   },
     computed: {
     ...mapState({login: state => state.m_login.login}),
     ...mapState(["user_auth"])
+  },
+    methods: {
+    logout: function() {
+      this.$store.dispatch("m_login/logout")
+    }
   }
 }
 </script>

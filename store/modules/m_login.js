@@ -29,6 +29,13 @@ export default {
           }
         });
       },
+      logout({ commit }) {
+        axios.get("http://localhost:13377/logout", {withCredentials:true}).then(res => {
+          console.log("logout:", res.data);
+          commit("SET_LOGIN", false);
+          router.push("/login")
+        });
+      }
      },
      mutations: {
       SET_LOGIN(state, login) {

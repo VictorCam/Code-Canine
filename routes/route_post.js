@@ -28,5 +28,11 @@ router.get("/post",verify, (req, res) => {
     res.status(200).send(id);
 });
 
+router.get("/logout",verify, (req, res) => {
+    res.clearCookie("vuex");
+    res.clearCookie("token");
+    res.status(200).send("success");
+});
+
 
 module.exports = router;

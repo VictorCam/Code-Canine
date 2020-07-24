@@ -33,7 +33,7 @@ export const router = new VueRouter({
   mode: "history"
 })
 
-router.beforeEach((to,from,next)=> {
+router.beforeEach((to,from,next) => {
   auth_require(to,from,next)
 })
 

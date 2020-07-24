@@ -3,9 +3,9 @@ const router = express.Router();
 const cors = require("cors");
 const connectsql = require("../server_connection");
 
-
 router.get("/", (req, res) => {
-  connectsql.query("SELECT * FROM user_tables", (err, rows, fields) => {
+  const sql = "SELECT * FROM user_tables";
+  connectsql.query(sql, (err, rows, fields) => {
     if(!err) {
       res.status(200).send(rows);
     }

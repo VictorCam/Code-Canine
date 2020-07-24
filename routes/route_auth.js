@@ -3,14 +3,11 @@ const cors = require("cors");
 const connectsql = require("../server_connection");
 const jwt = require("jsonwebtoken");
 const bcrpyt = require("bcrypt");
-const bodyParser = require('body-parser');
 const cookie = require("cookie");
 require("dotenv").config();
 
 var app = express();
 const router = express.Router();
-var jsonParser = bodyParser.json();
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 const corsOptions = {
   origin: 'http://localhost:8080',
@@ -20,12 +17,8 @@ const corsOptions = {
 router.use(cors(corsOptions));
 
 router.post("/login", (req, res) => {
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
-
-    var sql = "SELECT * FROM user_tables where user_tables.Name = ? AND user_tables.Password= ?";
-    connectsql.query(sql,[req.body.username,req.body.password],function (err, rows, fields) {
-
+    const sql = "SELECT * FROM user_tables where user_tables.Name = ? AND user_tables.Password= ?";
+    connectsql.query(sql,[req.body.username,req.body.password], function(err, rows, fields) {
       console.log("SQL username + pasword:", req.body.username, " ", req.body.password);
 
             if (rows.length === 1) {

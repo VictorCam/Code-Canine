@@ -1,8 +1,8 @@
 <template>
   <div id="main">
     <h1>CodeCanine</h1>
-    <p>Login: {{login}}</p>
-    <p>Key: {{user_auth}}</p>
+    <p>LOGIN: {{login}}</p>
+    <p>USER ID: {{ID}}</p>
     <router-link v-if="login==true" id="link" to="/">Home</router-link>
     <!-- <router-link v-if="login==false" id="link" to="/profile/1">Profile 1</router-link> -->
     <!-- <router-link v-if="login==false" id="link" to="/profile/2">Profile 2</router-link> -->
@@ -10,7 +10,10 @@
     <router-link v-if="login==false" id="link" to="/login">Login</router-link>
     <router-link v-if="login==false" id="link" to="/signup">Sign Up</router-link>
     <router-link v-if="login==true"  id="link" to="/post">Post</router-link>
-    <router-link v-if="login==true"  id="link" :to="'/profile/' + user_auth">My Profile</router-link>
+    <router-link v-if="login==true"  id="link" :to="'/profile/' + ID">My Profile</router-link>
+    <!-- <router-link v-if="login==true"  id="link" to="/profile/1">Profile test 1</router-link> -->
+    <!-- <router-link v-if="login==true"  id="link" to="/profile/2">Profile test 2</router-link> -->
+    <!-- <router-link v-if="login==false"  id="link" to="/profile/1">Profile test 1 (logout)</router-link> -->
     <button v-if="login==true" v-on:click="logout">LOGOUT</button>
     <router-view :key="$route.name + ($route.params.id || '')"></router-view>
     <cfooter></cfooter>
@@ -27,14 +30,14 @@ export default {
   mounted() {
     // this.$store.dispatch("loadData");
     if(this.$store.state.m_login_login == true) {
-    this.$store.dispatch("loadKey")
+    this.$store.dispatch("loadID")
     }
   },
-    computed: {
+  computed: {
     ...mapState({login: state => state.m_login.login}),
-    ...mapState(["user_auth"])
+    ...mapState(["ID"])
   },
-    methods: {
+  methods: {
     logout: function() {
       this.$store.dispatch("m_login/logout")
     }

@@ -5,19 +5,20 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //imported routes
 const
+  ID = require('./routes/route_ID'),
   home = require('./routes/route_home'),
   profiles = require('./routes/route_profile'),
   register = require('./routes/route_register'),
   login = require('./routes/route_auth'),
-  post = require('./routes/route_post')
+  post = require('./routes/route_posts'),
+  logout = require('./routes/route_logout')
 
 //linked routes (route middleware)
-app.use("/", [home,profiles,register,login,post]);
+app.use("/", [ID,home,profiles,register,login,post,logout]);
 
 
 //port

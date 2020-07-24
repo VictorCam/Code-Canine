@@ -1,11 +1,11 @@
-import vuex from "vuex";
-import Vue from "vue";
-import axios from "axios";
-import Cookies from 'js-cookie'; 
-// import {router} from "../src/main";
+import vuex from "vuex"
+import Vue from "vue"
+import axios from "axios"
+import Cookies from 'js-cookie'
+// import {router} from "../src/main"
 import m_login from "./modules/m_login"
 import createPersistedState from "vuex-persistedstate"
-Vue.use(vuex, axios);
+Vue.use(vuex, axios)
 
 // const config = axios.create({
 //   withCredentials:true,
@@ -30,41 +30,39 @@ export default new vuex.Store({
     }
   })],
   state: {
+    ID: 0,
     users: [],
     user: [],
     register: [],
-    user_auth: 0
+    posts: []
   },
   getters: {
   },
   actions: {
     loadUsers({ commit }) {
       axios.get("http://localhost:13377/").then(res => {
-        console.log("home:", res.data);
-        this.users = res.data;
-        commit("SET_USERS", this.users);
-      });
+        commit("SET_USERS", res.data);
+      })
     },
     loadUser({ commit }, payload) {
       axios.get(`http://localhost:13377/profile/${payload}`).then(res => {
-        console.log("profile:", res.data);
-        this.user = res.data;
-        commit("SET_USER", this.user);
-      });
+        commit("SET_USER", res.data);
+      })
     },
     loadRegister({ commit }, user) {
       axios.post("http://localhost:13377/signup", user).then(res => {
-        console.log("registering:", user);
-        this.register = res.data;
-        commit("SET_REGISTER", this.register);
-      });
+        commit("SET_REGISTER", res.data);
+      })
     },
-    loadKey({ commit }) {
-      axios.get("http://localhost:13377/post", {withCredentials:true}).then(res => {
-        console.log("logging in:", res.data);
-        this.key = res.data;
-        commit("SET_KEY", this.key); //why tho lol
-      });
+    loadID({ commit }) {
+      axios.get("http://localhost:13377/loadID", {withCredentials:true}).then(res => {
+        commit("SET_ID", res.data);
+      })
+    },
+    loadPosts({ commit }) {
+      axios.get("http://localhost:13377/posts", {withCredentials:true}).then(res => {
+        commit("SET_POSTS", res.data);
+      })
     }
   },
   mutations: {
@@ -78,8 +76,11 @@ export default new vuex.Store({
     SET_REGISTER(state, register) {
       state.register = register;
     },
-    SET_KEY(state, key) {
-      state.user_auth = key;
+    SET_ID(state, ID) {
+      state.ID = ID;
+    },
+    SET_POSTS(state, posts) {
+      state.posts = posts;
     }
   }
-});
+})

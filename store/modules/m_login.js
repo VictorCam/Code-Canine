@@ -31,8 +31,8 @@ export default {
       },
       logout({ commit }) {
         axios.get("http://localhost:13377/logout", {withCredentials:true}).then(res => {
-          console.log("logout:", res.data);
-          commit("SET_LOGIN", false);
+          commit("SET_LOGIN", res.data); //just gets set false
+          // replaceState({login})
           router.push("/login")
         });
       }

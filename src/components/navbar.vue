@@ -3,7 +3,7 @@
     <h1>CodeCanine</h1>
     <p>LOGIN: {{login}}</p>
     <p>USER ID: {{ID}}</p>
-    <router-link v-if="login==true" id="link" to="/">Home</router-link>
+    <!-- <router-link v-if="login==true" id="link" to="/">Home</router-link> -->
     <!-- <router-link v-if="login==false" id="link" to="/profile/1">Profile 1</router-link> -->
     <!-- <router-link v-if="login==false" id="link" to="/profile/2">Profile 2</router-link> -->
     <!-- <router-link v-if="login==false" id="link" to="/profile/3">Profile 3</router-link> -->

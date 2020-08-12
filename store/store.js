@@ -34,7 +34,8 @@ export default new vuex.Store({
     users: [],
     user: [],
     register: [],
-    posts: []
+    posts: [],
+    newpost: []
   },
   getters: {
   },
@@ -63,6 +64,31 @@ export default new vuex.Store({
       axios.get("http://localhost:13377/posts", {withCredentials:true}).then(res => {
         commit("SET_POSTS", res.data);
       })
+    },
+    createPost({ commit }, post_content) {
+      var newpost = {
+        POST_ID: 95,
+        ID: this.state.ID,
+        post: post_content.content
+      }
+      axios.post("http://localhost:13377/create_post", newpost).then(res => {
+        console.log(res.data)
+        commit("SET_CREATE_POST", newpost);
+      })
+    },
+    updatePost({ commit }, payload) {
+      axios.put("http://localhost:13377/update_post", payload).then(res => {
+        console.log("payload is:", payload)
+        console.log(res.data)
+        commit("SET_USER");
+      })
+    },
+    deletePost({ commit }, payload) {
+      axios.delete(`http://localhost:13377/delete_post/${payload}`, payload).then(res => {
+        console.log("payload is:", payload)
+        console.log(res.data)
+        commit("SET_USER");
+      })
     }
   },
   mutations: {
@@ -81,6 +107,9 @@ export default new vuex.Store({
     },
     SET_POSTS(state, posts) {
       state.posts = posts;
+    },
+    SET_CREATE_POST(state, posts) {
+      state.posts.push(posts)
     }
   }
 })

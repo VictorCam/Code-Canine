@@ -5,7 +5,7 @@ const connectsql = require("../server_connection");
 
 router.post("/signup", (req, res) => {
     var sql = "INSERT INTO user_tables(Name, Password) VALUES(?, ?)"
-    connectsql.query(sql, [req.body.username, req.body.password], function (err, data) {
+    connectsql.query(sql, [req.body.username.toString(), req.body.password.toString()], function (err, data) {
             if (!err) {
                 res.status(200);
                 console.log("sign up success!");

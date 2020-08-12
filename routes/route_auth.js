@@ -6,6 +6,8 @@ const bcrpyt = require("bcrypt");
 const cookie = require("cookie");
 require("dotenv").config();
 
+//uncomment the origin on both cors option and /auth res.setHeader
+
 var app = express();
 const router = express.Router();
 

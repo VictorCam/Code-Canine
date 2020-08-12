@@ -24,5 +24,4 @@ Content-Type: application/json
 }
 
 ###
-
-GET http://localhost:13377/auth?ID=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX0lEIjoxLCJpYXQiOjE1OTM1NDIwMzMsImV4cCI6MTU5MzU0MjIxM30.ZG75AP8S7Q9KEzmUZQ5EfUSR7zHJwP3m52C-xZC0njs
+DELETE http://localhost:13377/delete_post/3

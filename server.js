@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const app = express();
-// const serveStatic = require("serve-static")
+const serveStatic = require("serve-static")
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -19,8 +19,8 @@ const
   logout = require('./routes/route_logout')
 
 //linked routes (route middleware)
-app.use("/", [ID,home,profiles,register,login,post,logout]);
-// app.use('/', serveStatic(path.join(__dirname, '/dist')))
+// app.use("/", [ID,home,profiles,register,login,post,logout]);
+app.use('/', serveStatic(path.join(__dirname, '/dist')))
 
 
 //port

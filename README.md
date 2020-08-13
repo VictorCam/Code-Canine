@@ -49,6 +49,12 @@ make .env file on base directory then in .env write TOKEN_SECRET = "whatever_var
 vue ui
 ```
 
+### Extra
+
+``` 
+removed /dist on .gitignore
+```
+
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).

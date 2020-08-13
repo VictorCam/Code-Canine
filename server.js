@@ -19,6 +19,7 @@ const
 
 //linked routes (route middleware)
 app.use("/", [ID,home,profiles,register,login,post,logout]);
+app.use('/', serveStatic(path.join(__dirname, '/dist')))
 
 
 //port

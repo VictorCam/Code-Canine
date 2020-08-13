@@ -19,9 +19,10 @@ const
   post = require('./routes/route_posts'),
   logout = require('./routes/route_logout')
 
+app.use('/', serveStatic(path.join(__dirname, '/dist')))
+
 //linked routes (route middleware)
 app.use("/", [ID,home,profiles,register,login,post,logout]);
-app.use('/', serveStatic(path.join(__dirname, '/dist')))
 
 
 //port

@@ -21,6 +21,7 @@ const
 
 app.use('/', serveStatic(path.join(__dirname, '/dist')))
 
+
 //linked routes (route middleware)
 app.use("/", [ID,home,profiles,register,login,post,logout]);
 

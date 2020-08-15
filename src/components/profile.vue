@@ -1,7 +1,7 @@
 <template>
   <div class="profile">
     <h1>Profile</h1>
-    <button v-if="ID == user.ID">EDIT PROFILE</button>
+    <!-- <button v-if="ID == user.ID">EDIT PROFILE</button> -->
     <div v-if="user.ID">
     <img width="100px" height="100px" :src="userWithIcon.icon">
     <p> {{ user.Name }} </p>

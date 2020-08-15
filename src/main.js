@@ -21,7 +21,7 @@ Vue.use(VueRouter, VueAxios, Axios);
 const routes = [
   { path: "*", name: "404", component: notFound, meta: {auth_require: false} },
   { path: "/", name: "home", component: home, meta: {auth_require: false} },
-  { path: "/profile/:id", name: "profile", component: profile, meta: {auth_require: false} },
+  { path: "/profile/:id", name: "profile", component: profile, meta: {auth_require: true} },
   { path: "/login", name: "login", component: login, meta: {auth_require: false, auth_restrict: true} },
   { path: "/signup", name: "signup", component: signup, meta: {auth_require: false, auth_restrict: true} },
   { path: "/upload", name: "upload", component: upload, meta: {auth_require: true} },

@@ -67,7 +67,7 @@ export default new vuex.Store({
     },
     createPost({ commit }, post_content) {
       var newpost = {
-        POST_ID: 95,
+        // POST_ID: 95,
         ID: this.state.ID,
         post: post_content.content
       }

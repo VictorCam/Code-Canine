@@ -1,7 +1,7 @@
 import vuex from "vuex"
 import Vue from "vue"
 import axios from "axios"
-import Cookies from 'js-cookie'
+// import Cookies from 'js-cookie'
 // import {router} from "../src/main"
 import m_login from "./modules/m_login"
 import createPersistedState from "vuex-persistedstate"
@@ -22,12 +22,6 @@ export default new vuex.Store({
   },
   plugins: [createPersistedState({
     paths: ['m_login'],
-    storage: {
-      getItem: (key) => Cookies.get(key),
-      removeItem: (key) => Cookies.remove(key),
-      setItem: (key, value) =>
-      Cookies.set(key, value, { secure: true, SameSite:'Strict' }),
-    }
   })],
   state: {
     ID: 0,

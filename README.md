@@ -35,7 +35,7 @@ nodemon server.js
 ### Fix Vulerabilities
 
 ```
-npm update
+npm update or ncu -u
 ```
 
 ### Add Environment 
@@ -53,6 +53,7 @@ vue ui
 
 ``` 
 removed /dist on .gitignore
+if nodemon ins reinstalled make sure to use "npm install -g nodemon"
 ```
 
 ### Customize configuration

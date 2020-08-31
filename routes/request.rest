@@ -24,4 +24,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:13377/delete_post/3
+DELETE http://localhost:13377/delete_post/120

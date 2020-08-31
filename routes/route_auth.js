@@ -19,48 +19,29 @@ const corsOptions = {
 router.use(cors(corsOptions));
 
 router.post("/login", (req, res) => {
-    const sql = "SELECT * FROM user_tables where user_tables.Name = ? AND user_tables.Password= ?";
-    connectsql.query(sql,[req.body.username,req.body.password], function(err, rows, fields) {
-      console.log("SQL username + pasword:", req.body.username, " ", req.body.password);
-
-            if (rows.length === 1) {
-                console.log(rows[0].ID);
-                const token = jwt.sign({user_ID: rows[0].ID}, process.env.TOKEN_SECRET, {expiresIn: "24h"});
-                app.set('token', token);
-                res.send(true);
-            } 
-            else {
-                console.log("authentication failed"); //send  response of 401 for auth failed
-                res.send(false);
-            }
-        })
-})
-
-router.get("/auth", (req, res) => {
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
 
-  if(app.get('token')) {
-    var message = "SUCCESS";
+    const sql = "SELECT * FROM user_tables where user_tables.Name = ? AND user_tables.Password= ?";
+    connectsql.query(sql,[req.body.username,req.body.password], function(err, rows, fields) {
+      console.log("SQL username + pasword:", req.body.username, " ", req.body.password);
+            if (rows.length === 1) {
+                console.log(rows[0].ID);
 
-    // var now = new Date();
-    // var minutes = 1;
-    // now.setTime(now.getTime() + (minutes * 60 * 1000));
-    
-    res.setHeader('Set-Cookie', cookie.serialize('token', app.get('token'), {
-      httpOnly: true,
-      // maxAge: now,
-      sameSite: "strict"
-      }));
-    app.set('token', null);
-  }
-  else {
-    var message = "FAILIURE";
-  }
+                // var now = new Date();
+                // var minutes = 1;
+                // now.setTime(now.getTime() + (minutes * 60 * 1000));
 
-  console.log("AUTHORIZATION: ", message);
-  res.send(message);
-});
+                const token = jwt.sign({user_ID: rows[0].ID}, process.env.TOKEN_SECRET, {expiresIn: "24h"});
+                res.setHeader('Set-Cookie', cookie.serialize('token', token, { httpOnly: true, /*maxAge: now,*/ sameSite: "lax"}));
+                res.status(200).send(true);
+            } 
+            else {
+                console.log("authentication failed"); //send  response of 401 for auth failed
+                res.status(401).send(false);
+            }
+        })
+})
 
 router.use(cors());
 

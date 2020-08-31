@@ -5,14 +5,17 @@
     <form @submit.prevent="cpost">
       Make a post:
       <br>
-      <input type="text" v-model="post.content" />
+      <input type="text" v-model="addpost.content" />
       <input class="submitpost" type="submit" value="Submit" />
     </form>
     <br>
 
     <!-- Test: {{posts}} -->
     
-    <div v-for="post in posts" :key="post.id"> <!--note to self: "post" can be whatever name I want but I must use the name below-->
+
+
+    
+    <div v-for="post in posts.slice().reverse()" :key="post.id"> <!--note to self: "post" can be whatever name I want but I must use the name below-->
     <div v-if="post.ID == ID">
       {{post.POST_ID}}
       <router-link id="link" :to="'/profile/' + post.ID">{{post.Name}}</router-link>
@@ -31,6 +34,9 @@
       <br>
       <br>
     </div>
+
+
+
     </span>
     <span v-else> LOADING </span>
   </div>
@@ -41,7 +47,7 @@ import { mapState } from "vuex";
 export default {
     data() {
     return {
-      post: {
+      addpost: {
           content: ''
       },
       conpost: {
@@ -51,10 +57,14 @@ export default {
   },
   methods: {
     cpost() {
-      this.$store.dispatch("createPost", this.post)
+      console.log("addpost", this.addpost)
+      this.$store.dispatch("createPost", this.addpost)
+      // this.$store.dispatch("loadPosts")
+      this.addpost.content = '' //unoptimal I think
     },
     dpost(pID) {
-      this.$store.dispatch("deletePost", Number(pID))
+      this.$store.dispatch("deletePost", pID)
+      this.$store.dispatch("loadPosts")
     },
     upost(uID) {
       var updatepost = {
@@ -64,6 +74,7 @@ export default {
       console.log(updatepost)
       this.$store.dispatch("updatePost", updatepost)
       this.conpost.ucontent = '' //unoptimal I think
+      this.$store.dispatch("loadPosts")
     }
   },
   created() {

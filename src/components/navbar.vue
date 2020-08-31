@@ -2,6 +2,7 @@
   <div id="main">
     <h1>CodeCanine</h1>
     <p>LOGIN: {{login}}</p>
+    <!-- <p>SESSION: {{session}}</p> -->
     <p>USER ID: {{ID}}</p>
     <!-- <router-link v-if="login==true" id="link" to="/">Home</router-link> -->
     <!-- <router-link v-if="login==false" id="link" to="/profile/1">Profile 1</router-link> -->
@@ -29,9 +30,9 @@ export default {
   },
   mounted() {
     // this.$store.dispatch("loadData");
-    if(this.$store.state.m_login_login == true) {
-    this.$store.dispatch("loadID")
-    }
+    // if(this.$store.state.m_login_login == true) {
+    // this.$store.dispatch("loadID")
+    // }
   },
   computed: {
     ...mapState({login: state => state.m_login.login}),

@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 module.exports = function(req,res,next) {
-
     if(req.headers.cookie == null) { //check if cookie exist
       return res.status(401).send("Access Denied");
     }

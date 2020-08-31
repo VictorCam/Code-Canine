@@ -10,22 +10,20 @@ export default {
       login: false
     },
     actions: {
-      loadLogin({ commit }, user) {
-        axios.post("http://localhost:13377/login", user).then(res => {
-          // res.cookie('rememberme', '1', { expires: new Date(Date.now() + 900000), httpOnly: true })
-          console.log("STORE USER: ", user);
+      loadLogin({ commit }, payload) {
+
+      console.log("payload init", payload)
+      var bodyFormData = new FormData()
+      bodyFormData.append('username', payload.username)
+      bodyFormData.append('password', payload.password)
+      console.log("payload", payload.username, payload.password)
+
+        axios.post("http://localhost:13377/login", bodyFormData, {withCredentials:true}).then(res => {
           console.log("STORE STATUS:", res.data);
           this.login = res.data;
           commit("SET_LOGIN", this.login); //add {root: true} as it's own param (but not ideal)
-          return axios.get("http://localhost:13377/auth", {withCredentials:true})})
-          .then(res => {
-          console.log("STORE AUTH:", res.data);
-          if(res.data == 'SUCCESS') {
-            // var now = new Date();
-            // var minutes = 1;
-            // now.setTime(now.getTime() + (minutes * 60 * 1000));
-            router.push("/post") //since user is logged in then we will push /post route
-            // Cookies.set('access', 'true', {/*expires: 'Session',*/ SameSite: 'Strict' })
+          if(res.data == true) {
+            router.push("/post")
           }
         });
       },

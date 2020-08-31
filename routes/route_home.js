@@ -5,9 +5,9 @@ const connectsql = require("../server_connection");
 
 router.get("/", (req, res) => {
   const sql = "SELECT * FROM user_tables";
-  connectsql.query(sql, (err, rows, fields) => {
+  connectsql.query(sql, (err, data) => {
     if(!err) {
-      res.status(200).send(rows);
+      res.status(200).send(data);
     }
     else {
       console.log(err);

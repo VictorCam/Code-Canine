@@ -10,11 +10,21 @@ Vue.use(vuex, axios)
 // const config = axios.create({
 //   withCredentials:true,
 //   headers: {
-//     'Content-Type': 'application/json;charset=UTF-8',
 //     "Access-Control-Allow-Origin": 'http://localhost:8080',
 //     "Access-Control-Allow-Credentials": true,
+//     'Content-Type': 'application/json'
 //     }
 // });
+// let config = {
+//   // headers: {
+//   //   cookie: 'value',
+//   // }
+// }
+
+// let data = {
+//   'HTTP_CONTENT_LANGUAGE': self.language
+// }
+
 
 export default new vuex.Store({
   modules: {
@@ -24,6 +34,7 @@ export default new vuex.Store({
     paths: ['m_login'],
   })],
   state: {
+    tmp: [],
     ID: 0,
     users: [],
     user: [],
@@ -56,32 +67,49 @@ export default new vuex.Store({
     },
     loadPosts({ commit }) {
       axios.get("http://localhost:13377/posts", {withCredentials:true}).then(res => {
+        console.log(res.data)
         commit("SET_POSTS", res.data);
       })
     },
-    createPost({ commit }, post_content) {
-      var newpost = {
-        // POST_ID: 95,
-        ID: this.state.ID,
-        post: post_content.content
-      }
-      axios.post("http://localhost:13377/create_post", newpost).then(res => {
-        console.log(res.data)
-        commit("SET_CREATE_POST", newpost);
+    createPost({ commit }, payload) {
+      var bodyFormData = new FormData()
+      bodyFormData.append('info', payload.content)
+
+      axios.all([
+          axios.get("http://localhost:13377/username", {withCredentials:true}),
+          axios.post("http://localhost:13377/create_post", bodyFormData, {withCredentials:true})
+      ])
+      .then(axios.spread(function (res1, res2) {
+        var data = {...res1.data, ...res2.data}
+        commit("SET_NEW_POST", data);
+      }))
+      .catch(function (error) {
+        console.log(error)
       })
     },
     updatePost({ commit }, payload) {
-      axios.put("http://localhost:13377/update_post", payload).then(res => {
+      // console.log(payload)
+      console.log(payload)
+      console.log("payload is:", payload)
+
+      var bodyFormData = new FormData()
+      bodyFormData.append('info', payload.content)
+      bodyFormData.append('info', payload.ID)
+
+      axios.post("http://localhost:13377/update_post",bodyFormData, {withCredentials:true}).then(res => {
         console.log("payload is:", payload)
         console.log(res.data)
-        commit("SET_USER");
+        commit("SET_TMP");
       })
     },
     deletePost({ commit }, payload) {
-      axios.delete(`http://localhost:13377/delete_post/${payload}`, payload).then(res => {
-        console.log("payload is:", payload)
+      console.log("payload is:", payload)
+      var bodyFormData = new FormData();
+      bodyFormData.append('post', payload);
+
+      axios.post(`http://localhost:13377/delete_post`, bodyFormData, {withCredentials:true}).then(res => {
         console.log(res.data)
-        commit("SET_USER");
+      commit("SET_TMP")
       })
     }
   },
@@ -104,6 +132,11 @@ export default new vuex.Store({
     },
     SET_CREATE_POST(state, posts) {
       state.posts.push(posts)
+    },
+    SET_TMP() {
+    },
+    SET_NEW_POST(state, post) {
+      state.posts.push(post) 
     }
   }
 })

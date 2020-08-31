@@ -10,12 +10,18 @@ const corsOptions = {
 
 router.use(cors(corsOptions));
 
-const verify = require('./verify_token');
+const verify = require('./middleware/verify_token');
 
 router.get("/loadID",verify, (req, res) => {
     console.log("POST ROUTE ID:", req.user_ID); //yay we can use this for MySQL
     var id = req.user_ID.toString()
-    res.status(200).send(id);
+    if(id == null) {
+        res.status(401).send("failure");
+    } 
+    else {
+        res.status(200).send(id);
+    }
 });
+
 
 module.exports = router;

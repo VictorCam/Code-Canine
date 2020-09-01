@@ -3,7 +3,7 @@ require("dotenv").config();
 
 module.exports = function(req,res,next) {
     if(req.headers.cookie == null) { //check if cookie exist
-      return res.status(401).send("Access Denied");
+      return next();
     }
 
     var key = getCookieValue('token', req); //do regex match since cookie exists

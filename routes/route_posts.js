@@ -20,7 +20,7 @@ const verify = require('./middleware/verify_token')
 const test = require('./test')
 const { json } = require("body-parser")
 
-router.get("/posts",verify, (req, res) => {
+router.get("/posts", (req, res) => {
     var sql = "SELECT USER.ID, USER.Name, POST.POST_ID, POST.post FROM user_tables USER, user_post POST WHERE USER.ID = POST.ID"
     connectsql.query(sql, function (err, data) {
             if (!err) {
@@ -68,6 +68,7 @@ router.post("/create_post",verify, (req, res) => {
                 res.status(200).send(reply)
             } else {
                 console.log("something went wrong creating post")
+                res.status(401).send("unable to create post")
             }
         })
 });

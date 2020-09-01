@@ -26,18 +26,14 @@ export default {
             router.push("/post")
           }
         });
-      },
-      logout({ commit }) {
-        axios.get("http://localhost:13377/logout", {withCredentials:true}).then(res => {
-          commit("SET_LOGIN", res.data); //just gets set false
-          // replaceState({login})
-          router.push("/login")
-        });
       }
      },
      mutations: {
       SET_LOGIN(state, login) {
         state.login = login; //we can use this.state to access the root state
+      },
+      RESET_STATE(state) {
+        state.login = false; //we can use this.state to access the root state
       }
      },
      getters: {},

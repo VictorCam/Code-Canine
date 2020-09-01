@@ -1,8 +1,10 @@
 `<template>
   <div class="post" id="post">
     <h1>Post</h1>
-    <span v-if="ID">
-    <form @submit.prevent="cpost">
+    <span v-if="ID || ID == 0">
+    
+
+    <form v-if="ID" @submit.prevent="cpost">
       Make a post:
       <br>
       <input type="text" v-model="addpost.content" />

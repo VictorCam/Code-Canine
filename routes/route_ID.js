@@ -13,13 +13,12 @@ router.use(cors(corsOptions));
 const verify = require('./middleware/verify_token');
 
 router.get("/loadID",verify, (req, res) => {
-    console.log("POST ROUTE ID:", req.user_ID); //yay we can use this for MySQL
-    var id = req.user_ID.toString()
-    if(id == null) {
-        res.status(401).send("failure");
+    if(req.user_ID == null) {
+        res.status(200).send("0") //they are a guest
     } 
     else {
-        res.status(200).send(id);
+        var id = req.user_ID.toString()
+        res.status(200).send(id) //registered user
     }
 });
 

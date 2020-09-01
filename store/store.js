@@ -2,9 +2,9 @@ import vuex from "vuex"
 import Vue from "vue"
 import axios from "axios"
 // import Cookies from 'js-cookie'
-// import {router} from "../src/main"
 import m_login from "./modules/m_login"
 import createPersistedState from "vuex-persistedstate"
+import { router } from "../src/main"
 Vue.use(vuex, axios)
 
 // const config = axios.create({
@@ -111,6 +111,14 @@ export default new vuex.Store({
         console.log(res.data)
       commit("SET_TMP")
       })
+    },
+    logout({ commit }) {
+      axios.get("http://localhost:13377/logout", {withCredentials:true}).then(res => {
+        console.log("res", res)
+        commit("m_login/RESET_STATE")
+        commit("CLEAR_ALL")
+        router.push('/login')
+      });
     }
   },
   mutations: {
@@ -137,6 +145,9 @@ export default new vuex.Store({
     },
     SET_NEW_POST(state, post) {
       state.posts.push(post) 
+    },
+    CLEAR_ALL(state) {
+      state.ID = 0
     }
   }
 })

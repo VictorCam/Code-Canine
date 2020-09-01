@@ -10,7 +10,7 @@
     <!-- <router-link v-if="login==false" id="link" to="/profile/3">Profile 3</router-link> -->
     <router-link v-if="login==false" id="link" to="/login">Login</router-link>
     <router-link v-if="login==false" id="link" to="/signup">Sign Up</router-link>
-    <router-link v-if="login==true"  id="link" to="/post">Post</router-link>
+    <router-link id="link" to="/post">Post</router-link>
     <router-link v-if="login==true"  id="link" :to="'/profile/' + ID">My Profile</router-link>
     <!-- <router-link v-if="login==true"  id="link" to="/profile/1">Profile test 1</router-link> -->
     <!-- <router-link v-if="login==true"  id="link" to="/profile/2">Profile test 2</router-link> -->
@@ -29,10 +29,6 @@ export default {
     cfooter: cfooter
   },
   mounted() {
-    // this.$store.dispatch("loadData");
-    // if(this.$store.state.m_login_login == true) {
-    // this.$store.dispatch("loadID")
-    // }
   },
   computed: {
     ...mapState({login: state => state.m_login.login}),
@@ -40,7 +36,7 @@ export default {
   },
   methods: {
     logout: function() {
-      this.$store.dispatch("m_login/logout")
+      this.$store.dispatch("logout")
     }
   }
 }

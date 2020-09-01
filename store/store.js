@@ -67,7 +67,6 @@ export default new vuex.Store({
     },
     loadPosts({ commit }) {
       axios.get("http://localhost:13377/posts", {withCredentials:true}).then(res => {
-        console.log(res.data)
         commit("SET_POSTS", res.data);
       })
     },
@@ -88,28 +87,28 @@ export default new vuex.Store({
       })
     },
     updatePost({ commit }, payload) {
-      // console.log(payload)
       console.log(payload)
       console.log("payload is:", payload)
 
       var bodyFormData = new FormData()
       bodyFormData.append('info', payload.content)
       bodyFormData.append('info', payload.ID)
+      bodyFormData.append('info', payload.p_index)
 
       axios.post("http://localhost:13377/update_post",bodyFormData, {withCredentials:true}).then(res => {
         console.log("payload is:", payload)
-        console.log(res.data)
-        commit("SET_TMP");
+        // console.log(res.data.post)
+        commit("SET_UPDATE_POST", res.data);
       })
     },
     deletePost({ commit }, payload) {
       console.log("payload is:", payload)
       var bodyFormData = new FormData();
-      bodyFormData.append('post', payload);
+      bodyFormData.append('info', payload.ID);
+      bodyFormData.append('info', payload.p_index);
 
       axios.post(`http://localhost:13377/delete_post`, bodyFormData, {withCredentials:true}).then(res => {
-        console.log(res.data)
-      commit("SET_TMP")
+      commit("SET_DELETE_POST", res.data)
       })
     },
     logout({ commit }) {
@@ -136,15 +135,18 @@ export default new vuex.Store({
       state.ID = ID;
     },
     SET_POSTS(state, posts) {
-      state.posts = posts;
-    },
-    SET_CREATE_POST(state, posts) {
-      state.posts.push(posts)
+      state.posts = posts.slice().reverse();
     },
     SET_TMP() {
     },
     SET_NEW_POST(state, post) {
-      state.posts.push(post) 
+      state.posts.unshift(post) 
+    },
+    SET_DELETE_POST(state, index) {
+      state.posts.splice(index,1)
+    },
+    SET_UPDATE_POST(state, payload) {
+      state.posts[payload.index].post = payload.post
     },
     CLEAR_ALL(state) {
       state.ID = 0

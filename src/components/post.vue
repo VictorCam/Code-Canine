@@ -17,19 +17,21 @@
 
 
     
-    <div v-for="post in posts.slice().reverse()" :key="post.id"> <!--note to self: "post" can be whatever name I want but I must use the name below-->
+    <div v-for="(post, index) in posts" :key="post.id"> <!--note to self: "post" can be whatever name I want but I must use the name below-->
     <div v-if="post.ID == ID">
       {{post.POST_ID}}
+      {{index}}
       <router-link id="link" :to="'/profile/' + post.ID">{{post.Name}}</router-link>
       {{post.post}}
-      <form @submit.prevent="upost(post.POST_ID)">
+      <form @submit.prevent="upost(post.POST_ID, index)">
       <input type="text" v-model.lazy="conpost.ucontent" />
       <input class="editpost" type="submit" value="EDIT POST" />
     </form>
       <!-- <button v-on:click="upost(post.POST_ID)">EDIT POST</button> -->
-      <button class="deletepost" v-on:click="dpost(post.POST_ID)">DELETE POST</button>
+      <button class="deletepost" v-on:click="dpost(post.POST_ID, index)">DELETE POST</button>
     </div>
     <div v-else>
+      {{index}}
       <router-link id="link" :to="'/profile/' + post.ID">{{post.Name}}</router-link>
       {{post.post}}
     </div>
@@ -64,19 +66,16 @@ export default {
       // this.$store.dispatch("loadPosts")
       this.addpost.content = '' //unoptimal I think
     },
-    dpost(pID) {
-      this.$store.dispatch("deletePost", pID)
-      this.$store.dispatch("loadPosts")
+    dpost(pID,index) {
+      var deletepost = {ID: pID, p_index: index}
+      this.$store.dispatch("deletePost", deletepost)
+      // this.$store.dispatch("loadPosts")
     },
-    upost(uID) {
-      var updatepost = {
-        ID: uID,
-        content: this.conpost.ucontent
-      }
-      console.log(updatepost)
+    upost(uID,index) {
+      var updatepost = {ID: uID, content: this.conpost.ucontent, p_index: index}
       this.$store.dispatch("updatePost", updatepost)
       this.conpost.ucontent = '' //unoptimal I think
-      this.$store.dispatch("loadPosts")
+      // this.$store.dispatch("loadPosts")
     }
   },
   created() {

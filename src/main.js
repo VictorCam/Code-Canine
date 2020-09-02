@@ -40,7 +40,7 @@ router.beforeEach((to,from,next) => {
 function check() {
   var AuthCheck = false
 
-  if(store.state.m_login.login) { //needs improvement (can delete token and still access routes)
+  if(store.state.m_login.login == true) { //needs improvement (can delete token and still access routes)
     AuthCheck = store.state.m_login.login
   }
 

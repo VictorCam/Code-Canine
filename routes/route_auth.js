@@ -33,7 +33,7 @@ router.post("/login", (req, res) => {
                 // now.setTime(now.getTime() + (minutes * 60 * 1000));
 
                 const token = jwt.sign({user_ID: rows[0].ID}, process.env.TOKEN_SECRET, {expiresIn: "24h"});
-                res.setHeader('Set-Cookie', cookie.serialize('token', token, { httpOnly: true, /*maxAge: now,*/ sameSite: "lax"}));
+                res.setHeader('Set-Cookie', cookie.serialize('token', token, { httpOnly: true, /*maxAge: now,*/ sameSite: "strict"}));
                 res.status(200).send(true);
             } 
             else {

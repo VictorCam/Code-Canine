@@ -13,8 +13,6 @@ router.use(cors(corsOptions));
 const verify = require('./middleware/verify_token');
 
 router.get("/logout",verify, (req, res) => {
-    // res.clearCookie("vuex");
-    res.clearCookie("access");
     res.clearCookie("token");
     res.status(200).send(false); //properly logged out (I think I might need to reset data after this in my store?)
 });

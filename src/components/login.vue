@@ -1,6 +1,7 @@
 <template>
   <div class="login">
     <h1>Login</h1>
+
     <form @submit.prevent="login">
       UserName:
       <br />
@@ -16,6 +17,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -27,9 +29,18 @@ export default {
   },
   methods: {
     login() {
-      console.log(this.user);
-      this.$store.dispatch("m_login/loadLogin", this.user);
+        console.log(this.user);
+        this.$store.dispatch("m_login/loadLogin", this.user);
     }
+  },
+  created() {
+    this.$store.dispatch("loadID")
+    if(this.$store.state.ID != 0) {
+      this.$store.dispatch("logout")
+    }
+  },
+    computed: {
+    ...mapState(["ID"])
   }
 };
 </script>

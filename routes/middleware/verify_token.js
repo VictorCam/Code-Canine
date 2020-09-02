@@ -8,7 +8,7 @@ module.exports = function(req,res,next) {
 
     var key = getCookieValue('token', req); //do regex match since cookie exists
     if(!key) {
-        res.clearCookie('vuex');
+        // res.clearCookie('vuex');
         return res.status(401).send("Access Denied"); //if cookie name does not match then error out
     }
 
@@ -18,8 +18,8 @@ module.exports = function(req,res,next) {
         return next();
       }
     else {
-        res.clearCookie('vuex'); //NOTE to self: alternate solution would be to edit the cookies state
-        return res.status(400).send("Invalid Token"); //error if jwt is expired or invalid
+        // res.clearCookie('vuex'); //NOTE to self: alternate solution would be to edit the cookies state
+        return res.status(401).send("Access Denied"); //error if jwt is expired or invalid
     }
   })
 };

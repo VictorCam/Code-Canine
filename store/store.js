@@ -5,6 +5,8 @@ import axios from "axios"
 import m_login from "./modules/m_login"
 import createPersistedState from "vuex-persistedstate"
 import { router } from "../src/main"
+import SecureLS from "secure-ls";
+var ls = new SecureLS({ isCompression: false });
 Vue.use(vuex, axios)
 
 // const config = axios.create({
@@ -15,16 +17,6 @@ Vue.use(vuex, axios)
 //     'Content-Type': 'application/json'
 //     }
 // });
-// let config = {
-//   // headers: {
-//   //   cookie: 'value',
-//   // }
-// }
-
-// let data = {
-//   'HTTP_CONTENT_LANGUAGE': self.language
-// }
-
 
 export default new vuex.Store({
   modules: {
@@ -32,6 +24,11 @@ export default new vuex.Store({
   },
   plugins: [createPersistedState({
     paths: ['m_login'],
+    storage: {
+      getItem: (key) => ls.get(key),
+      setItem: (key, value) => ls.set(key, value),
+      removeItem: (key) => ls.remove(key),
+    }
   })],
   state: {
     tmp: [],

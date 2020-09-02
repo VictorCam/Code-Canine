@@ -15,7 +15,7 @@ const verify = require('./middleware/verify_token');
 router.get("/loadID",verify, (req, res) => {
     if(req.user_ID == null) {
         res.status(200).send("0") //they are a guest
-    } 
+    }
     else {
         var id = req.user_ID.toString()
         res.status(200).send(id) //registered user

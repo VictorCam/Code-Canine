@@ -31,11 +31,11 @@ router.get("/posts", (req, res) => {
 
 router.get("/username",verify, (req, res) => {
     console.log("POST ROUTE ID:", req.user_ID); //yay we can use this for MySQL
-    var id = req.user_ID.toString()
-    if(id == null) {
+    if(req.user_ID == null) {
         res.status(401).send("failure");
-    } 
+    }
     else {
+        var id = req.user_ID.toString()
         var sql = "SELECT Name FROM user_tables WHERE ID = ?"
         connectsql.query(sql, [id], function (err, data) {
                 if (!err) {

@@ -16,7 +16,7 @@
 </template>
 
 <script>
-//import axios from "axios";
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -28,9 +28,19 @@ export default {
   },
   methods: {
     addPost() {
-      this.$store.dispatch("loadRegister", this.user);
+        this.$store.dispatch("loadRegister", this.user);
     }
+  },
+  created() {
+    this.$store.dispatch("loadID")
+    if(this.$store.state.ID != 0) {
+      this.$store.dispatch("logout")
+    }
+  },
+    computed: {
+    ...mapState(["ID"])
   }
+  
   /*
   watch: {
     $route(to) {

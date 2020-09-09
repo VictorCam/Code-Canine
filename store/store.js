@@ -6,7 +6,7 @@ import m_login from "./modules/m_login"
 import createPersistedState from "vuex-persistedstate"
 import { router } from "../src/main"
 import SecureLS from "secure-ls";
-var ls = new SecureLS({ isCompression: false });
+var ls = new SecureLS({isCompression:true});
 Vue.use(vuex, axios)
 
 // const config = axios.create({
@@ -59,7 +59,15 @@ export default new vuex.Store({
     },
     loadID({ commit }) {
       axios.get("http://localhost:13377/loadID", {withCredentials:true}).then(res => {
+        console.log("backend res.data:", res.data)
+        if(res.data == 0) {
+          commit("m_login/RESET_STATE") //bad for guests but it's for security measures
+          commit("CLEAR_ALL")
+          //if this WAS a personal feed then you should redirect users
+        }
+        else {
         commit("SET_ID", res.data);
+        }
       })
     },
     loadPosts({ commit }) {
@@ -110,6 +118,7 @@ export default new vuex.Store({
     },
     logout({ commit }) {
       axios.get("http://localhost:13377/logout", {withCredentials:true}).then(res => {
+        console.log("LOGOUT HAS BEEN CALLED")
         console.log("res", res)
         commit("m_login/RESET_STATE")
         commit("CLEAR_ALL")

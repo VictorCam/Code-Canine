@@ -6,6 +6,9 @@
     <img width="100px" height="100px" :src="userWithIcon.icon">
     <p> {{ user.Name }} </p>
     <p> {{ user.icon}} </p>
+    Profile loaded {{ user.ID }}
+    <br>
+    Current user {{ ID }}
     </div>
     <div v-else>LOADING</div>
 

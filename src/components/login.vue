@@ -34,10 +34,6 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("loadID")
-    if(this.$store.state.ID != 0) {
-      this.$store.dispatch("logout")
-    }
   },
     computed: {
     ...mapState(["ID"])

@@ -13,7 +13,7 @@
     <br>
 
     <!-- Test: {{posts}} -->
-    
+
 
 
     
@@ -41,6 +41,7 @@
 
 
 
+
     </span>
     <span v-else> LOADING </span>
   </div>
@@ -60,45 +61,23 @@ export default {
     }
   },
   methods: {
-    restrict() { //prevent making queires with a false login
-      var failure = false
-      if(this.$store.state.ID != 0 && this.$store.state.m_login.login == false) {
-        this.$store.dispatch("logout")
-        failure = true
-      }
-      return failure
-    },
     cpost() {
-      var failure = this.restrict()
-      if(failure == true) {
-        return
-      }
-      console.log("addpost", this.addpost)
       this.$store.dispatch("createPost", this.addpost)
       this.addpost.content = '' //unoptimal I think
     },
     dpost(pID,index) {
-      var failure = this.restrict()
-      if(failure == true) {
-        return
-      }
       var deletepost = {ID: pID, p_index: index}
       this.$store.dispatch("deletePost", deletepost)
     },
     upost(uID,index) {
-      var failure = this.restrict()
-      if(failure == true) {
-        return
-      }
       var updatepost = {ID: uID, content: this.conpost.ucontent, p_index: index}
       this.$store.dispatch("updatePost", updatepost)
       this.conpost.ucontent = '' //unoptimal I think
     }
   },
   created() {
-    this.$store.dispatch("loadID")
-    this.restrict()
-    this.$store.dispatch("loadPosts")
+      this.$store.dispatch("loadID")
+      this.$store.dispatch("loadPosts")
   },
   computed: {
     ...mapState(["ID", "posts", "newpost"])

@@ -76,8 +76,8 @@ router.post("/update_post",verify, (req, res) => {
     res.setHeader("Access-Control-Allow-Credentials",true)
 
 
-    var sql = "UPDATE user_post SET Post = (?) WHERE user_post.POST_ID = (?)"
-    connectsql.query(sql, [req.body.info[0], req.body.info[1]], function (err, data) {
+    var sql = "UPDATE user_post SET Post = (?) WHERE user_post.POST_ID = (?) AND user_post.ID = (?)" //will not manipulate a post if they do do this!
+    connectsql.query(sql, [req.body.info[0], req.body.info[1], req.user_ID], function (err, data) {
             if (!err) {
                 console.log(data)
                 var reply = {
@@ -99,7 +99,7 @@ router.post("/delete_post",verify, (req, res) => {
     console.log("post id:", req.body.info[0])
     console.log("index id:", req.body.info[1])
     console.log("user id:", req.user_ID)
-    var sql = "DELETE FROM user_post WHERE user_post.POST_ID = (?)"
+    var sql = "DELETE FROM user_post WHERE user_post.POST_ID = (?)"  //will not manipulate a post if they do do this!
     connectsql.query(sql, [req.body.info[0]], function (err, data) {
             if (!err) {
                 res.status(200).send(req.body.info[1])

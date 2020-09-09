@@ -10,9 +10,9 @@ const corsOptions = {
 
 router.use(cors(corsOptions));
 
-const verify = require('./middleware/verify_token');
+const user = require('./middleware/check_user');
 
-router.get("/loadID",verify, (req, res) => {
+router.get("/loadID",user, (req, res) => {
     if(req.user_ID == null) {
         res.status(200).send("0") //they are a guest
     }

@@ -1,5 +1,7 @@
 Work In Progress MEVN Website
 
+(MOVED TO: [Project-CC](https://github.com/VictorCam/project-cc)) 
+
 Using MySQL, ExpressJS, VueJS, and NodeJS
 
 ## Project setup
